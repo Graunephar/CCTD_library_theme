@@ -58,3 +58,6 @@ function theme_widgets_init() {
 
 add_action( 'widgets_init', 'theme_widgets_init' );
 
+require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+
+
