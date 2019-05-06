@@ -1,1 +1,1 @@
-Worpress theme with tag based serach on categories for the CCTD library site.
+Wordpress theme with tag based search on categories for the CCTD library site.
