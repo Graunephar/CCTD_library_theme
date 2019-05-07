@@ -43,3 +43,23 @@ add_action( 'widgets_init', 'theme_widgets_init' );
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 
 
+add_action( 'init', 'cp_change_post_object' );
+// Change dashboard Posts to News
+function cp_change_post_object() {
+	$get_post_type = get_post_type_object('post');
+	$labels = $get_post_type->labels;
+	$labels->name = 'Forløb';
+	$labels->singular_name = 'Forløb';
+	$labels->add_new = 'Tilføj Forløb';
+	$labels->add_new_item = 'Tilføj Forløb';
+	$labels->edit_item = 'Rediger Forløb';
+	$labels->new_item = 'Nyt Forløb';
+	$labels->view_item = 'Se Forløb';
+	$labels->search_items = 'Søg i forløb';
+	$labels->not_found = 'Ingen forløb fundet';
+	$labels->not_found_in_trash = 'Ingen forløb fundet i papirkurven';
+	$labels->all_items = 'Alle Forløb';
+	$labels->menu_name = 'Forløb';
+	$labels->name_admin_bar = 'Forløb';
+}
+

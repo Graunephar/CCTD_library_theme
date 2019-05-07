@@ -10,18 +10,27 @@ Text Domain: CCTD_Library
 */
 
 
-#sidebarCollapse {
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+
+}
+
+.sidebar-header img {
+    max-width: 100%;
+    max-height:100%;
+}
+
+#sidebarCollapseButton {
     width: 40px;
     height: 40px;
     background: #f5f5f5;
+    margin-right: 1em;
 }
 
-.topbar {
-    top: 0;
-    position: relative;
-}
-
-#sidebarCollapse span {
+#sidebarCollapseButton span {
     width: 80%;
     height: 2px;
     margin: 0 auto;
@@ -31,23 +40,24 @@ Text Domain: CCTD_Library
 }
 
 
-#sidebarCollapse span:first-of-type {
+#sidebarCollapseButton span:first-of-type {
     /* rotate first one */
     transform: rotate(45deg) translate(2px, 2px);
 }
 
-#sidebarCollapse span:nth-of-type(2) {
+
+#sidebarCollapseButton span:nth-of-type(2) {
     /* second one is not visible */
     opacity: 0;
 }
 
-#sidebarCollapse span:last-of-type {
+#sidebarCollapseButton span:last-of-type {
     /* rotate third one */
     transform: rotate(-45deg) translate(1px, -1px);
 }
 
 
-#sidebarCollapse.active span {
+#sidebarCollapseButton.active span {
     /* no rotation */
     transform: none;
     /* all bars are visible */
@@ -55,20 +65,59 @@ Text Domain: CCTD_Library
     margin: 5px auto;
 }
 
+#menu-wrapper {
+    align-items: stretch;
+}
+
+#page-wrapper {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+
+}
+
+#content-wrapper {
+    padding: 1em;
+    flex-direction: column;
+
+}
 
 .wrapper {
     display: flex;
-    align-items: stretch;
-    perspective: 1500px;
+}
+
+#wrapper {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.fill-height-or-more > div {
+    /* these are the flex items */
+    flex: 1;
 }
 
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+    min-height: 100%;
+    max-height: 100%;
     background: #003d73;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: center left; /* Set the transformed position of sidebar to center left side. */
+    padding-left: 0.5em;
+}
+
+.nav-link {
+    color: white;
+    font-size: 1.2em;
+}
+
+.nav-link:hover {
+    text-decoration: underline !important;
+    text-decoration: white;
+    color: grey;
 }
 
 #sidebar.active {
@@ -96,28 +145,28 @@ Text Domain: CCTD_Library
        Removing the rotation from the first,
        last bars and reappear the second bar on default state,
        and giving them a vertical margin */
-    #sidebarCollapse span:first-of-type,
-    #sidebarCollapse span:nth-of-type(2),
-    #sidebarCollapse span:last-of-type {
+    #sidebarCollapseButton span:first-of-type,
+    #sidebarCollapseButton span:nth-of-type(2),
+    #sidebarCollapseButton span:last-of-type {
         transform: none;
         opacity: 1;
         margin: 5px auto;
     }
 
     /* Removing the vertical margin and make the first and last bars rotate again when the sidebar is open, hiding the second bar */
-    #sidebarCollapse.active span {
+    #sidebarCollapseButton.active span {
         margin: 0 auto;
     }
 
-    #sidebarCollapse.active span:first-of-type {
+    #sidebarCollapseButton.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
 
-    #sidebarCollapse.active span:nth-of-type(2) {
+    #sidebarCollapseButton.active span:nth-of-type(2) {
         opacity: 0;
     }
 
-    #sidebarCollapse.active span:last-of-type {
+    #sidebarCollapseButton.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 }
