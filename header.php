@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapseButton" class="navbar-btn btn-default">
+                <button type="button" id="sidebarCollapseButton" class="navbar-btn btn-secondary">
                     <span></span>
                     <span></span>
                     <span></span>

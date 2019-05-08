@@ -15,10 +15,13 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue' );
 
 add_theme_support( 'title-tag' );
 add_theme_support( 'post-thumbnails' );
-/*register_nav_menus( array(
-	'header' => 'Custom Primary Menu',
+
+//The menues that can be choosen in the WP admin menu editor , referenced from nav.php
+register_nav_menus( array(
+	'type' => 'Gymnasietype',
+	'fag' => 'Fag'
 ) );
-*/
+
 function theme_widgets_init() {
 	register_sidebar( array(
 		'name'          => 'Footer 1',
@@ -44,7 +47,7 @@ require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 
 
 add_action( 'init', 'cp_change_post_object' );
-// Change dashboard Posts to News
+// Change dashboard Posts to Forløb
 function cp_change_post_object() {
 	$get_post_type = get_post_type_object('post');
 	$labels = $get_post_type->labels;

@@ -6,21 +6,37 @@
             <img src="<?php bloginfo('stylesheet_directory')?>/img/logo.png">
         </div>
 
-        <ul class="list-unstyled components">
-
-            <p>Populære Emner</p>
+        <div class="sidebar-menu">
+            <h4>Populære Fag</h4>
             <?php
 			wp_nav_menu( array(
-				'theme_location'  => 'header',
+				'theme_location'  => 'fag',
 				'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
 				'container'       => 'li',
 				'container_class' => 'collapse navbar-collapse',
 				'container_id'    => 'bs-example-navbar-collapse-1',
-				'menu_class'      => 'navbar-nav mr-auto flex-column',
+				'menu_class'      => 'navbar-nav mr-auto nav-pills',
 				'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
 				'walker'          => new WP_Bootstrap_Navwalker(),
 			) ); ?>
+        </div>
 
+        <div class="sidebar-menu">
+
+            <h4>Gymnasietyper</h4>
+
+            <?php
+	        wp_nav_menu( array(
+		        'theme_location'  => 'type',
+		        'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+		        'container'       => 'li',
+		        'container_class' => 'collapse navbar-collapse',
+		        'container_id'    => 'bs-example-navbar-collapse-1',
+		        'menu_class'      => 'navbar-nav mr-auto flex-column',
+		        'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+		        'walker'          => new WP_Bootstrap_Navwalker(),
+	        ) ); ?>
+        </div>
 
     </nav>
 
