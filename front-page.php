@@ -11,17 +11,7 @@
     <div class="contaimer">
         <div class="row">
             <div class="col">
-                <h1>Noget text</h1>
-
-                Velkommen til CCTD Library. Her er noget tekst der forklarer hvad denne side kan og hvordan du bruger
-                den.
-                Den giver også en masse fantiastisk information om CCTD og AU.
-
-
-                Du kan finde forløb ved at bruge søge funktionen nedenfor eller ved at gå til specifikke emner via
-                menuen
-                til venstre.
-
+				<?php dynamic_sidebar( 'home_center' ); ?>
             </div>
         </div>
         <div class="row">
@@ -29,12 +19,13 @@
 
             </div>
             <div class="col-lg-6 col-md-8 col-sm-8">
-                <div class="d-flex flex-row justify-content-center align-items-stretch top-buffer"> <!-- Search container -->
+                <div class="d-flex flex-row justify-content-center align-items-stretch top-buffer">
+                    <!-- Search container -->
                     <div class="d-flex flex-grow-1">
-                        <select class="select2-search form-control-lg" name="states[]" lang="[lang="da"]"
-                                multiple="multiple">
-                            <option value="AL">Alabama</option>
-                            <option value="WY">Wyoming</option>
+                        <select class="select2-search form-control-lg" name="states[]" lang="[lang=" da"]"
+                        multiple="multiple">
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
                         </select>
                     </div>
                     <div class="pull-left d-flex">
@@ -63,5 +54,7 @@
 
     <!-- d-flex justify-content-center form-group -->
 
+
+<?php print_r( get_categories( $args = '' ) ); ?>
 
 <?php get_footer(); ?>

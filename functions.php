@@ -70,3 +70,22 @@ function cp_change_post_object() {
 	$labels->name_admin_bar = 'Forløb';
 }
 
+
+/**
+ * Register our sidebars and widgetized areas.
+ *
+ */
+function widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Forside',
+		'id'            => 'home_center',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>',
+	) );
+
+}
+
+add_action( 'widgets_init', 'widgets_init' );
