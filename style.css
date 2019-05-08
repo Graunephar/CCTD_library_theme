@@ -134,7 +134,7 @@ h1, h2, h3, h4 {
     padding-left: 0.5em;
 }
 
-.navbar-btn:focus {
+.navbar-btn:focus, .search-btn {
     outline: none;
     box-shadow: none;
 }
@@ -204,3 +204,25 @@ h1, h2, h3, h4 {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 }
+
+
+/* =========== SEARCH ====== */
+
+.formbox {
+    align-items: stretch;
+}
+.select2-search {
+    flex: 1;
+}
+
+.search-btn {
+    display: inline-flex;
+    color: #fff;
+    background-color: #003d73;
+}
+
+.select2 {
+    width:100%!important;
+}
+
+

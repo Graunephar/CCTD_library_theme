@@ -3,7 +3,9 @@
 
     <nav id="sidebar">
         <div class="sidebar-header">
+            <a href="<?php bloginfo('url')?>">
             <img src="<?php bloginfo('stylesheet_directory')?>/img/logo.png">
+            </a>
         </div>
 
         <div class="sidebar-menu">
