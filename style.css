@@ -211,6 +211,7 @@ h1, h2, h3, h4 {
 .formbox {
     align-items: stretch;
 }
+
 .select2-search {
     flex: 1;
 }
@@ -222,7 +223,12 @@ h1, h2, h3, h4 {
 }
 
 .select2 {
-    width:100%!important;
+    width: 100% !important;
 }
+
+.top-buffer {
+    margin-top: 30%;
+}
+
 
 

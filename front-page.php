@@ -29,9 +29,9 @@
 
             </div>
             <div class="col-lg-6 col-md-8 col-sm-8">
-                <div class="d-flex flex-row justify-content-center align-items-stretch"> <!-- Search container -->
+                <div class="d-flex flex-row justify-content-center align-items-stretch top-buffer"> <!-- Search container -->
                     <div class="d-flex flex-grow-1">
-                        <select class="select2-search" name="states[]" lang="[lang="da"]"
+                        <select class="select2-search form-control-lg" name="states[]" lang="[lang="da"]"
                                 multiple="multiple">
                             <option value="AL">Alabama</option>
                             <option value="WY">Wyoming</option>
