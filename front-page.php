@@ -22,10 +22,29 @@
                 <div class="d-flex flex-row justify-content-center align-items-stretch top-buffer">
                     <!-- Search container -->
                     <div class="d-flex flex-grow-1">
-                        <select class="select2-search form-control-lg" name="states[]" lang="[lang=" da"]"
+                        <select id="search-box" class="select2-search form-control-lg" name="states[]" lang="[lang=" da"]"
                         multiple="multiple">
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
+
+
+						<?php
+
+						$categories = get_categories( array( 'hide_empty' => 0 ) );
+
+						$res = array_map( function ( WP_Term $term ) {
+
+							if ( $term->category_nicename != 'uncategorized' ) {
+								return $term->name;
+							}
+
+						}, $categories );
+
+						foreach ( $res as $value ):
+
+							?>
+
+                            <option value="<?php echo $value ?>"><?php echo $value ?></option>
+						<?php endforeach; ?>
+
                         </select>
                     </div>
                     <div class="pull-left d-flex">
@@ -38,6 +57,7 @@
 
             <div class="col-lg-3 col-md-2 col-sm-2">
 
+
             </div>
         </div>
 
@@ -49,12 +69,17 @@
             $('.select2-search').select2({
                 language: "da"
             });
+
+
+            $('select').on(
+                'select2:select',(
+                    function(){
+                        $('#search-box').setAttribute("height")
+                    }
+                )
+            );
+
         });
     </script>
-
-    <!-- d-flex justify-content-center form-group -->
-
-
-<?php print_r( get_categories( $args = '' ) ); ?>
 
 <?php get_footer(); ?>

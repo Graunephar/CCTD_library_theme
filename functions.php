@@ -75,9 +75,9 @@ function cp_change_post_object() {
  * Register our sidebars and widgetized areas.
  *
  */
-function widgets_init() {
+function all_widgets_init() {
 
-	register_sidebar( array(
+	register_sidebar( array( /* Custom text area on front page */
 		'name'          => 'Forside',
 		'id'            => 'home_center',
 		'before_widget' => '<div>',
@@ -88,4 +88,4 @@ function widgets_init() {
 
 }
 
-add_action( 'widgets_init', 'widgets_init' );
+add_action( 'widgets_init', 'all_widgets_init' );
