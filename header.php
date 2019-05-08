@@ -11,7 +11,7 @@
 	<?php require "nav.php"; ?>
 
     <div id="page-wrapper" class="wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="top-bar"> <!-- the top bar -->
             <div class="container-fluid">
 
                 <button type="button" id="sidebarCollapseButton" class="navbar-btn btn-secondary">
