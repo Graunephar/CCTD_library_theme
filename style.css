@@ -10,7 +10,6 @@ Text Domain: CCTD_Library
 */
 
 
-
 @font-face {
     font-family: 'AU_passata_regular';
     src: url('fonts/aupassata_rg-webfont.woff2') format('woff2'),
@@ -19,7 +18,22 @@ Text Domain: CCTD_Library
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'AU_passata_regular_bold';
+    src: url('fonts/aupassata_bold-webfont.woff2') format('woff2'),
+    url('fonts/aupassata_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'AU_passata_light';
+    src: url('fonts/aupassata_light-webfont.woff2') format('woff2'),
+    url('fonts/aupassata_light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 body {
     width: 100%;
@@ -27,12 +41,15 @@ body {
     margin: 0;
     position: absolute;
     font-family: AU_passata_regular;
+}
 
+
+h1, h2, h3, h4 {
 }
 
 .sidebar-header img {
     max-width: 100%;
-    max-height:100%;
+    max-height: 100%;
 }
 
 #sidebarCollapseButton {
@@ -104,10 +121,6 @@ body {
     height: 100%;
 }
 
-.fill-height-or-more > div {
-    /* these are the flex items */
-    flex: 1;
-}
 
 #sidebar {
     min-width: 250px;
