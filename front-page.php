@@ -32,7 +32,7 @@
 
 						$res = array_map( function ( WP_Term $term ) {
 
-							if ( $term->category_nicename != 'uncategorized' ) {
+							if ( $term->category_nicename != 'uncategorized' ) { //Dont show uncategorised category
 								return $term->name;
 							}
 
@@ -74,7 +74,7 @@
             $('select').on(
                 'select2:select',(
                     function(){
-                        $('#search-box').setAttribute("height")
+                        $('search-box').focus(); //TODO: Find a way to redo focus on box
                     }
                 )
             );
