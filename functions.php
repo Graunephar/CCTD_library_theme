@@ -89,3 +89,17 @@ function all_widgets_init() {
 }
 
 add_action( 'widgets_init', 'all_widgets_init' );
+
+
+/**
+ * Register custom query vars for search
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/query_vars
+ */
+function register_query_vars( $vars ) {
+	$vars[] = 'type';
+	$vars[] = 'fag';
+	$vars[] = 'teknologi';
+	return $vars;
+}
+add_filter( 'query_vars', 'register_query_vars' );

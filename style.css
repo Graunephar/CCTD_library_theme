@@ -216,7 +216,7 @@ h1, h2, h3, h4 {
     flex: 1;
 }
 
-.search-btn {
+#search-btn {
     display: inline-flex;
     color: #fff;
     background-color: #003d73;
