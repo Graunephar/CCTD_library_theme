@@ -133,14 +133,17 @@ function create_custom_taxonomy() {
 
 }
 
+add_action( 'init', 'create_custom_taxonomy', 0 );
+
+
 //https://codex.wordpress.org/Function_Reference/register_taxonomy
 function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $content_type, $hierarcical, $description ) {
 
 	$label_array = generate_taxonomy_label_array( $name_singular, $name_plural, $name_new );
 
-	$db_friendly_name_singular = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $name_singular); // Creates a version of the name in ascii
-	$db_friendly_name_plural = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $name_plural); // https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
-	
+	$db_friendly_name_singular = remove_bad_chard( $name_singular ); // Creates a version of the name in ascii
+	$db_friendly_name_plural   = remove_bad_chard( $name_plural ); // https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
+
 	// taxonomy register
 	register_taxonomy( $db_friendly_name_plural, array( $content_type ), array(
 		'hierarchical'       => $hierarcical,
@@ -198,11 +201,17 @@ function mb_ucfirst( $string ) {
 
 	return mb_strtoupper( $firstChar ) . $then;
 }
+/**
+ * Creates a version of the name in ascii
+ * https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
+ */
+function remove_bad_chard( $string ) {
 
-add_action( 'init', 'create_custom_taxonomy', 0 );
+	return preg_replace( '/[\x00-\x1F\x80-\xFF]/', '', $string );
 
+}
 
-/*
+/**
  * Dynimically get theme names based on location
  * https://www.andrewgail.com/getting-a-menu-name-in-wordpress/
  */
