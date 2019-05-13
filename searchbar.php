@@ -1,35 +1,57 @@
 <div class="d-flex flex-row justify-content-center align-items-stretch">
     <!-- Search container -->
-        <div class="d-flex flex-grow-1">
+    <div class="d-flex flex-grow-1">
 
-            <select id="search-box" class="select2-search form-control-lg" name="states[]" lang="[lang=" da"]"
-            multiple="multiple">
+        <select id="search-box" class="select2-search form-control-lg" name="states[]" lang="[lang=" da"]"
+        multiple="multiple">
 
 
-			<?php
+		<?php //Get all taxonomy terms from wordpress and put into select2 picker as options
 
-			$categories = get_categories( array( 'hide_empty' => 0 ) );
+		$args = array(
+			'public' => true
+		);
 
-			$res = array_map( function ( WP_Term $term ) {
+		$output = 'names'; // or names
 
-				if ( $term->category_nicename != 'uncategorized' ) { //Dont show uncategorised category
+		$taxonomies = get_taxonomies( $args, $output );
+
+		$all_names = array();
+
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = get_terms( array( //Get all terms (all 'labels') for each taxonomy
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => false, // Should proberbly be true in production
+			) );
+
+			var_dump( $terms );
+			$names = array_map( function ( WP_Term $term ) {
+				if ( $term->slug != 'uncategorized' ) { //Dont show uncategorised category
 					return $term->name;
 				}
+			}, $terms );
 
-			}, $categories );
+			$all_names = array_merge( $all_names, $names );
+		}
 
-			foreach ( $res as $value ):
 
-				?>
+		foreach ( $all_names as $value ):
 
-                <option value="<?php echo $value ?>"><?php echo $value ?></option>
-			<?php endforeach; ?>
+			if ( $value == null ) {
+				continue;
+			} //Secure that we dont print null for any arguments we have skipped
 
-            </select>
-        </div>
-        <div class="pull-left d-flex">
-            <button class="btn" id="search-btn" type="submit">Søg</button>
-        </div>
+			?>
+
+            <option value="<?php echo $value ?>"><?php echo $value ?></option>
+		<?php endforeach; ?>
+
+        </select>
+    </div>
+    <div class="pull-left d-flex">
+        <button class="btn" id="search-btn" type="submit">Søg</button>
+    </div>
+
 </div>
 
 
@@ -48,7 +70,7 @@
             )
         );
 
-        $('#search-btn').click(function() {
+        $('#search-btn').click(function () {
 
             let valuearray = $('#search-box').val();
             forEach()

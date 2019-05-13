@@ -59,7 +59,7 @@ require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 
 
 // Change dashboard Posts to Forløb
-function cp_change_post_object() {
+function rename_post_object() {
 	$get_post_type              = get_post_type_object( 'post' );
 	$labels                     = $get_post_type->labels;
 	$labels->name               = 'Forløb';
@@ -77,10 +77,10 @@ function cp_change_post_object() {
 	$labels->name_admin_bar     = 'Forløb';
 }
 
-add_action( 'init', 'cp_change_post_object' );
+add_action( 'init', 'rename_post_object' );
 
 
-function revcon_change_cat_object() {
+function rename_categories() {
 	global $wp_taxonomies;
 	$labels                     = &$wp_taxonomies['category']->labels;
 	$labels->name               = 'Fag';
@@ -98,7 +98,7 @@ function revcon_change_cat_object() {
 	$labels->name_admin_bar     = 'Fag';
 }
 
-add_action( 'init', 'revcon_change_cat_object' );
+add_action( 'init', 'rename_categories' );
 
 
 /**
@@ -126,7 +126,7 @@ add_action( 'widgets_init', 'all_widgets_init' );
 function create_custom_taxonomy() {
 	register_custom_taxonomy( 'uddannelsestype', 'uddannelsestyper', 'ny', 'post', false, 'hej' );
 	register_custom_taxonomy( 'årgang', 'årgange', 'ny', 'post', false, 'hej' );
-	register_custom_taxonomy( 'teknologi', 'teknologi', 'ny', 'post', false, 'hej' );
+	register_custom_taxonomy( 'teknologi', 'teknologier', 'ny', 'post', false, 'hej' );
 	register_custom_taxonomy( 'projekt', 'projekter', 'nyt', 'post', false, 'hej' );
 	register_custom_taxonomy( 'niveau', 'niveauer', 'nyt', 'post', false, 'hej' );
 
