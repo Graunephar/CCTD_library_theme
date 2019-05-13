@@ -22,8 +22,16 @@ add_theme_support( 'post-thumbnails' );
 
 //The menues that can be choosen in the WP admin menu editor , referenced from nav.php
 register_nav_menus( array(
-	'type' => 'Gymnasietype',
-	'fag'  => 'Fag'
+	'menu1' => 'Menu 1',
+	'menu2' => 'Menu 2',
+	'menu3' => 'Menu 3',
+	'menu4' => 'Menu 4',
+	'menu5' => 'Menu 5',
+	'menu6' => 'Menu 6',
+	'menu7' => 'Menu 7',
+	'menu8' => 'Menu 8',
+	'menu9' => 'Menu 9',
+	'menu10' => 'Menu 10'
 ) );
 
 function theme_widgets_init() {

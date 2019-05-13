@@ -8,38 +8,18 @@
             </a>
         </div>
 
-        <div class="sidebar-menu">
-            <h4><?php echo_menu_name('fag');?></h4>
-			<?php
-			wp_nav_menu( array(
-				'theme_location'  => 'fag',
-				'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
-				'container'       => 'li',
-				'container_class' => 'collapse navbar-collapse',
-				'container_id'    => 'bs-example-navbar-collapse-1',
-				'menu_class'      => 'navbar-nav mr-auto nav-pills',
-				'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-				'walker'          => new WP_Bootstrap_Navwalker(),
-			) ); ?>
-        </div>
-
-        <div class="sidebar-menu">
-
-            <h4>Gymnasietyper</h4>
-
-			<?php
-			wp_nav_menu( array(
-				'theme_location'  => 'type',
-				'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
-				'container'       => 'li',
-				'container_class' => 'collapse navbar-collapse',
-				'container_id'    => 'bs-example-navbar-collapse-1',
-				'menu_class'      => 'navbar-nav mr-auto flex-column',
-				'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-				'walker'          => new WP_Bootstrap_Navwalker(),
-			) ); ?>
-        </div>
-
+		<?php
+		echo_menu( 'menu1' );
+		echo_menu( 'menu2' );
+		echo_menu( 'menu3' );
+		echo_menu( 'menu4' );
+		echo_menu( 'menu5' );
+		echo_menu( 'menu6' );
+		echo_menu( 'menu7' );
+		echo_menu( 'menu8' );
+		echo_menu( 'menu9' );
+		echo_menu( 'menu10' );
+		?>
     </nav>
 
 
@@ -54,4 +34,24 @@
 
 </div>
 
+<?php
 
+function echo_menu( $location ) {
+
+	echo '<div class="sidebar-menu">';
+	echo '<h4>' . get_menu_name( $location ) . '</h4>';
+
+	wp_nav_menu( array(
+		'theme_location'  => $location,
+		'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+		'container'       => 'li',
+		'container_class' => 'collapse navbar-collapse',
+		'container_id'    => 'bs-example-navbar-collapse-1',
+		'menu_class'      => 'navbar-nav mr-auto nav-pills',
+		'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+		'walker'          => new WP_Bootstrap_Navwalker(),
+	) );
+	echo '</div>';
+}
+
+?>
