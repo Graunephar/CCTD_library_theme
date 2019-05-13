@@ -68,25 +68,26 @@ function cp_change_post_object() {
 	$labels->menu_name          = 'Forløb';
 	$labels->name_admin_bar     = 'Forløb';
 }
+
 add_action( 'init', 'cp_change_post_object' );
 
 
 function revcon_change_cat_object() {
 	global $wp_taxonomies;
-	$labels = &$wp_taxonomies['category']->labels;
-	$labels->name = 'Fag';
-	$labels->singular_name = 'Fag';
-	$labels->add_new = 'Tilføj fag';
-	$labels->add_new_item = 'Tilføj fag';
-	$labels->edit_item = 'Rediger fag';
-	$labels->new_item = 'Nyt fag';
-	$labels->view_item = 'Vis fag';
-	$labels->search_items = 'Søg på fag';
-	$labels->not_found = 'Ingen fag fundet';
+	$labels                     = &$wp_taxonomies['category']->labels;
+	$labels->name               = 'Fag';
+	$labels->singular_name      = 'Fag';
+	$labels->add_new            = 'Tilføj fag';
+	$labels->add_new_item       = 'Tilføj fag';
+	$labels->edit_item          = 'Rediger fag';
+	$labels->new_item           = 'Nyt fag';
+	$labels->view_item          = 'Vis fag';
+	$labels->search_items       = 'Søg på fag';
+	$labels->not_found          = 'Ingen fag fundet';
 	$labels->not_found_in_trash = 'Ingen fag fundet i skraldespanden';
-	$labels->all_items = 'Alle fag';
-	$labels->menu_name = 'Fag';
-	$labels->name_admin_bar = 'Fag';
+	$labels->all_items          = 'Alle fag';
+	$labels->menu_name          = 'Fag';
+	$labels->name_admin_bar     = 'Fag';
 }
 
 add_action( 'init', 'revcon_change_cat_object' );
@@ -112,8 +113,6 @@ function all_widgets_init() {
 add_action( 'widgets_init', 'all_widgets_init' );
 
 
-
-
 //https://www.wpblog.com/create-custom-taxonomies-in-wordpress/
 //create a custom taxonomy name
 function create_custom_taxonomy() {
@@ -124,13 +123,12 @@ function create_custom_taxonomy() {
 	register_custom_taxonomy( 'niveau', 'niveauer', 'nyt', 'post', false, 'hej' );
 
 
-
 }
 
 //https://codex.wordpress.org/Function_Reference/register_taxonomy
 function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $content_type, $hierarcical, $description ) {
 
-	$label_array = generate_taxonomy_label_array($name_singular, $name_plural, $name_new);
+	$label_array = generate_taxonomy_label_array( $name_singular, $name_plural, $name_new );
 
 	// taxonomy register
 	register_taxonomy( $name_plural, array( $content_type ), array(
@@ -154,10 +152,10 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 
 }
 
-function generate_taxonomy_label_array($singular, $plural, $name_new) {
+function generate_taxonomy_label_array( $singular, $plural, $name_new ) {
 	return array(
-		'name'                       => _x( mb_ucfirst($plural), 'Overordnet navn' ),
-		'singular_name'              => _x( mb_ucfirst($singular), 'Navn i ental' ),
+		'name'                       => _x( mb_ucfirst( $plural ), 'Overordnet navn' ),
+		'singular_name'              => _x( mb_ucfirst( $singular ), 'Navn i ental' ),
 		'search_items'               => __( 'Søg på ' . $plural ),
 		'all_items'                  => __( 'Alle ' . $plural ),
 		'parent_item'                => __( 'Forældre ' . $singular ),
@@ -166,7 +164,7 @@ function generate_taxonomy_label_array($singular, $plural, $name_new) {
 		'update_item'                => __( 'Opdater ' . $singular ),
 		'add_new_item'               => __( 'Tilføj ' . $name_new . ' ' . $singular ),
 		'new_item_name'              => __( 'Navnet på den nye' . $singular ),
-		'menu_name'                  => __( mb_ucfirst($plural) ),
+		'menu_name'                  => __( mb_ucfirst( $plural ) ),
 		'view_item'                  => __( 'Vis ' . $singular ),
 		'popular_items'              => __( 'Populære ' . $plural ),
 		'separate_items_with_commas' => __( 'Komma separerede ' . $plural ),
@@ -177,23 +175,63 @@ function generate_taxonomy_label_array($singular, $plural, $name_new) {
 
 	);
 }
+
 /*
  * A version of ucfirst converting multibyte (unicode) characters to upercase
  * https://stackoverflow.com/questions/2517947/ucfirst-function-for-multibyte-character-encodings
  */
-function mb_ucfirst($string) {
-	$strlen = mb_strlen($string);
-	$firstChar = mb_substr($string, 0, 1);
-	$then = mb_substr($string, 1, $strlen - 1);
-	return mb_strtoupper($firstChar) . $then;
+function mb_ucfirst( $string ) {
+	$strlen    = mb_strlen( $string );
+	$firstChar = mb_substr( $string, 0, 1 );
+	$then      = mb_substr( $string, 1, $strlen - 1 );
+
+	return mb_strtoupper( $firstChar ) . $then;
 }
 
 add_action( 'init', 'create_custom_taxonomy', 0 );
 
-//https://metabox.io/how-to-create-custom-meta-boxes-custom-fields-in-wordpress/
 
-//https://shibashake.com/wordpress-theme/wordpress-custom-taxonomy-input-panels
-//https://rudrastyh.com/wordpress/tag-metabox-like-categories.html
+/*
+ * Dynimically get theme names based on location
+ * https://www.andrewgail.com/getting-a-menu-name-in-wordpress/
+ */
+function ag_get_theme_menu( $theme_location ) {
+	if ( ! $theme_location ) {
+		return false;
+	}
+	$theme_locations = get_nav_menu_locations();
+	if ( ! isset( $theme_locations[ $theme_location ] ) ) {
+		return false;
+	}
+	$menu_obj = get_term( $theme_locations[ $theme_location ], 'nav_menu' );
+	if ( ! $menu_obj ) {
+		$menu_obj = false;
+	}
+
+	return $menu_obj;
+}
+
+
+function get_menu_name( $theme_location ) {
+	if ( ! $theme_location ) {
+		return false;
+	}
+
+	$menu_obj = ag_get_theme_menu( $theme_location );
+	if ( ! $menu_obj ) {
+		return false;
+	}
+
+	if ( ! isset( $menu_obj->name ) ) {
+		return false;
+	}
+
+	return $menu_obj->name;
+}
+
+function echo_menu_name($themelocation) {
+	echo get_menu_name($themelocation);
+}
 
 ?>
 
