@@ -50,7 +50,6 @@ add_action( 'widgets_init', 'theme_widgets_init' );
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 
 
-add_action( 'init', 'cp_change_post_object' );
 // Change dashboard Posts to Forløb
 function cp_change_post_object() {
 	$get_post_type              = get_post_type_object( 'post' );
@@ -69,6 +68,28 @@ function cp_change_post_object() {
 	$labels->menu_name          = 'Forløb';
 	$labels->name_admin_bar     = 'Forløb';
 }
+add_action( 'init', 'cp_change_post_object' );
+
+
+function revcon_change_cat_object() {
+	global $wp_taxonomies;
+	$labels = &$wp_taxonomies['category']->labels;
+	$labels->name = 'Fag';
+	$labels->singular_name = 'Fag';
+	$labels->add_new = 'Tilføj fag';
+	$labels->add_new_item = 'Tilføj fag';
+	$labels->edit_item = 'Rediger fag';
+	$labels->new_item = 'Nyt fag';
+	$labels->view_item = 'Vis fag';
+	$labels->search_items = 'Søg på fag';
+	$labels->not_found = 'Ingen fag fundet';
+	$labels->not_found_in_trash = 'Ingen fag fundet i skraldespanden';
+	$labels->all_items = 'Alle fag';
+	$labels->menu_name = 'Fag';
+	$labels->name_admin_bar = 'Fag';
+}
+
+add_action( 'init', 'revcon_change_cat_object' );
 
 
 /**
@@ -91,62 +112,34 @@ function all_widgets_init() {
 add_action( 'widgets_init', 'all_widgets_init' );
 
 
-/**
- * Register custom query vars for search
- *
- * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/query_vars
- */
-function register_query_vars( $vars ) {
-	$vars[] = 'type';
-	$vars[] = 'fag';
-	$vars[] = 'teknologi';
-	$vars[] = 'projekt';
-
-	return $vars;
-}
-
-add_filter( 'query_vars', 'register_query_vars' );
 
 
 //https://www.wpblog.com/create-custom-taxonomies-in-wordpress/
 //create a custom taxonomy name
-function create_cw_hierarchical_taxonomy() {
-	$topic_labels = array(
-		'name'                       => _x( 'Topics', 'taxonomy general name' ),
-		'singular_name'              => _x( 'Topic', 'taxonomy singular name' ),
-		'search_items'               => __( 'Search Topics' ),
-		'all_items'                  => __( 'All Topics' ),
-		'parent_item'                => __( 'Parent Topic' ),
-		'parent_item_colon'          => __( 'Parent Topic:' ),
-		'edit_item'                  => __( 'Edit Topic' ),
-		'update_item'                => __( 'Update Topic' ),
-		'add_new_item'               => __( 'Add New Topic' ),
-		'new_item_name'              => __( 'New Topic Name' ),
-		'menu_name'                  => __( 'Topics' ),
-		'view_item'                  => __( 'Vis topic' ),
-		'popular_items'              => __( 'Populære Topics' ),
-		'separate_items_with_commas' => __( 'Komma separerede topics' ),
-		'add_or_remove_items'        => __( 'Tilføj eller fjern topics' ),
-		'choose_from_most_used'      => __( 'Vælg fra de mest brugte Topics' ),
-		'not_found'                  => __( 'Ingen topics fundet' ),
-		'back_to_items'              => ( 'Tilbage til topics' )
+function create_custom_taxonomy() {
+	register_custom_taxonomy( 'uddannelsestype', 'uddannelsestyper', 'ny', 'post', false, 'hej' );
+	register_custom_taxonomy( 'årgang', 'årgange', 'ny', 'post', false, 'hej' );
+	register_custom_taxonomy( 'teknologi', 'teknologi', 'ny', 'post', false, 'hej' );
+	register_custom_taxonomy( 'projekt', 'projekter', 'nyt', 'post', false, 'hej' );
+	register_custom_taxonomy( 'niveau', 'niveauer', 'nyt', 'post', false, 'hej' );
 
-	);
 
-	register_custom_taxonomy( 'post', true, 'topic', 'hej', $topic_labels );
 
 }
 
 //https://codex.wordpress.org/Function_Reference/register_taxonomy
-function register_custom_taxonomy( $content_type, $hierarcical, $name, $description, $label_array ) {
+function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $content_type, $hierarcical, $description ) {
+
+	$label_array = generate_taxonomy_label_array($name_singular, $name_plural, $name_new);
+
 	// taxonomy register
-	register_taxonomy( 'topics', array( $content_type ), array(
-		'hierarchical'       => $hierarcical,
-		'labels'             => $labels,
+	register_taxonomy( $name_plural, array( $content_type ), array(
+		'hierarchical'       => true,
+		'labels'             => $label_array,
 		'show_ui'            => true,
 		'show_admin_column'  => true,
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'topic' ),
+		'rewrite'            => array( 'singular' => $name_singular ),
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
@@ -161,7 +154,31 @@ function register_custom_taxonomy( $content_type, $hierarcical, $name, $descript
 
 }
 
-add_action( 'init', 'create_cw_hierarchical_taxonomy', 0 );
+function generate_taxonomy_label_array($singular, $plural, $name_new) {
+	return array(
+		'name'                       => _x( ucfirst($plural), 'Overordnet navn' ),
+		'singular_name'              => _x( ucfirst($singular), 'Navn i ental' ),
+		'search_items'               => __( 'Søg på ' . $plural ),
+		'all_items'                  => __( 'Alle ' . $plural ),
+		'parent_item'                => __( 'Forældre ' . $singular ),
+		'parent_item_colon'          => __( 'Parent ' . $singular . ':' ),
+		'edit_item'                  => __( 'Rediger ' . $singular ),
+		'update_item'                => __( 'Opdater ' . $singular ),
+		'add_new_item'               => __( 'Tilføj ' . $name_new . ' ' . $singular ),
+		'new_item_name'              => __( 'Navnet på den nye' . $singular ),
+		'menu_name'                  => __( ucfirst($plural) ),
+		'view_item'                  => __( 'Vis ' . $singular ),
+		'popular_items'              => __( 'Populære ' . $plural ),
+		'separate_items_with_commas' => __( 'Komma separerede ' . $plural ),
+		'add_or_remove_items'        => __( 'Tilføj eller fjern ' . $plural ),
+		'choose_from_most_used'      => __( 'Vælg fra de mest brugte ' . $plural ),
+		'not_found'                  => __( 'Ingen ' . $plural . ' fundet' ),
+		'back_to_items'              => ( 'Tilbage til ' . $plural )
+
+	);
+}
+
+add_action( 'init', 'create_custom_taxonomy', 0 );
 
 //https://metabox.io/how-to-create-custom-meta-boxes-custom-fields-in-wordpress/
 
