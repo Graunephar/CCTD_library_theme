@@ -134,7 +134,7 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 
 	// taxonomy register
 	register_taxonomy( $name_plural, array( $content_type ), array(
-		'hierarchical'       => true,
+		'hierarchical'       => $hierarcical,
 		'labels'             => $label_array,
 		'show_ui'            => true,
 		'show_admin_column'  => true,
