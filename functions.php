@@ -7,9 +7,9 @@ function theme_enqueue() {
 	wp_enqueue_style( 'Montserrat', "https://fonts.googleapis.com/css?family=Montserrat:700|Montserrat:normal|Montserrat:300" );
 	wp_enqueue_style( 'fontawesome', 'https://use.fontawesome.com/releases/v5.2.0/css/all.css' );
 	wp_enqueue_script( 'bootstrapcdn', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array( 'jquery' ), '', true );
-	wp_enqueue_script( 'jquerycdn', 'https://code.jquery.com/jquery-3.4.1.min.js');
-	wp_enqueue_script( 'select2cdn', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js');
-	wp_enqueue_script( 'select2cdnlang', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/i18n/da.js'); //Danisk translation file
+	wp_enqueue_script( 'jquerycdn', 'https://code.jquery.com/jquery-3.4.1.min.js' );
+	wp_enqueue_script( 'select2cdn', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js' );
+	wp_enqueue_script( 'select2cdnlang', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/i18n/da.js' ); //Danisk translation file
 	wp_enqueue_style( 'select2csscdn', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css' );
 
 }
@@ -23,7 +23,7 @@ add_theme_support( 'post-thumbnails' );
 //The menues that can be choosen in the WP admin menu editor , referenced from nav.php
 register_nav_menus( array(
 	'type' => 'Gymnasietype',
-	'fag' => 'Fag'
+	'fag'  => 'Fag'
 ) );
 
 function theme_widgets_init() {
@@ -53,21 +53,21 @@ require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 add_action( 'init', 'cp_change_post_object' );
 // Change dashboard Posts to Forløb
 function cp_change_post_object() {
-	$get_post_type = get_post_type_object('post');
-	$labels = $get_post_type->labels;
-	$labels->name = 'Forløb';
-	$labels->singular_name = 'Forløb';
-	$labels->add_new = 'Tilføj Forløb';
-	$labels->add_new_item = 'Tilføj Forløb';
-	$labels->edit_item = 'Rediger Forløb';
-	$labels->new_item = 'Nyt Forløb';
-	$labels->view_item = 'Se Forløb';
-	$labels->search_items = 'Søg i forløb';
-	$labels->not_found = 'Ingen forløb fundet';
+	$get_post_type              = get_post_type_object( 'post' );
+	$labels                     = $get_post_type->labels;
+	$labels->name               = 'Forløb';
+	$labels->singular_name      = 'Forløb';
+	$labels->add_new            = 'Tilføj Forløb';
+	$labels->add_new_item       = 'Tilføj Forløb';
+	$labels->edit_item          = 'Rediger Forløb';
+	$labels->new_item           = 'Nyt Forløb';
+	$labels->view_item          = 'Se Forløb';
+	$labels->search_items       = 'Søg i forløb';
+	$labels->not_found          = 'Ingen forløb fundet';
 	$labels->not_found_in_trash = 'Ingen forløb fundet i papirkurven';
-	$labels->all_items = 'Alle Forløb';
-	$labels->menu_name = 'Forløb';
-	$labels->name_admin_bar = 'Forløb';
+	$labels->all_items          = 'Alle Forløb';
+	$labels->menu_name          = 'Forløb';
+	$labels->name_admin_bar     = 'Forløb';
 }
 
 
@@ -100,6 +100,75 @@ function register_query_vars( $vars ) {
 	$vars[] = 'type';
 	$vars[] = 'fag';
 	$vars[] = 'teknologi';
+	$vars[] = 'projekt';
+
 	return $vars;
 }
+
 add_filter( 'query_vars', 'register_query_vars' );
+
+
+//https://www.wpblog.com/create-custom-taxonomies-in-wordpress/
+//create a custom taxonomy name
+function create_cw_hierarchical_taxonomy() {
+	$topic_labels = array(
+		'name'                       => _x( 'Topics', 'taxonomy general name' ),
+		'singular_name'              => _x( 'Topic', 'taxonomy singular name' ),
+		'search_items'               => __( 'Search Topics' ),
+		'all_items'                  => __( 'All Topics' ),
+		'parent_item'                => __( 'Parent Topic' ),
+		'parent_item_colon'          => __( 'Parent Topic:' ),
+		'edit_item'                  => __( 'Edit Topic' ),
+		'update_item'                => __( 'Update Topic' ),
+		'add_new_item'               => __( 'Add New Topic' ),
+		'new_item_name'              => __( 'New Topic Name' ),
+		'menu_name'                  => __( 'Topics' ),
+		'view_item'                  => __( 'Vis topic' ),
+		'popular_items'              => __( 'Populære Topics' ),
+		'separate_items_with_commas' => __( 'Komma separerede topics' ),
+		'add_or_remove_items'        => __( 'Tilføj eller fjern topics' ),
+		'choose_from_most_used'      => __( 'Vælg fra de mest brugte Topics' ),
+		'not_found'                  => __( 'Ingen topics fundet' ),
+		'back_to_items'              => ( 'Tilbage til topics' )
+
+	);
+
+	register_custom_taxonomy( 'post', true, 'topic', 'hej', $topic_labels );
+
+}
+
+//https://codex.wordpress.org/Function_Reference/register_taxonomy
+function register_custom_taxonomy( $content_type, $hierarcical, $name, $description, $label_array ) {
+	// taxonomy register
+	register_taxonomy( 'topics', array( $content_type ), array(
+		'hierarchical'       => $hierarcical,
+		'labels'             => $labels,
+		'show_ui'            => true,
+		'show_admin_column'  => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'topic' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_nav_menus'  => true,
+		'show_in_rest'       => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column'  => true,
+		'description'        => $description
+	) );
+
+
+}
+
+add_action( 'init', 'create_cw_hierarchical_taxonomy', 0 );
+
+//https://metabox.io/how-to-create-custom-meta-boxes-custom-fields-in-wordpress/
+
+//https://shibashake.com/wordpress-theme/wordpress-custom-taxonomy-input-panels
+//https://rudrastyh.com/wordpress/tag-metabox-like-categories.html
+
+?>
+
+
+

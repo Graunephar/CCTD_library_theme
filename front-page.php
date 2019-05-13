@@ -32,20 +32,5 @@
     </div>
 
 
-<?php //var_dump(get_categories()); ?>
-
-<?php $query = new WP_Query( array( 'cat' => '2,6,17,38' ) );
-
-
-var_dump($query)
-
-?>
-
-
-<!--
-https://codex.wordpress.org/Class_Reference/WP_Query#Category_Parameters
-https://www.smashingmagazine.com/2016/03/advanced-wordpress-search-with-wp_query/
-
--->
 
 <?php get_footer(); ?>
