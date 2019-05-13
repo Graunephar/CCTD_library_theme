@@ -22,15 +22,15 @@ add_theme_support( 'post-thumbnails' );
 
 //The menues that can be choosen in the WP admin menu editor , referenced from nav.php
 register_nav_menus( array(
-	'menu1' => 'Menu 1',
-	'menu2' => 'Menu 2',
-	'menu3' => 'Menu 3',
-	'menu4' => 'Menu 4',
-	'menu5' => 'Menu 5',
-	'menu6' => 'Menu 6',
-	'menu7' => 'Menu 7',
-	'menu8' => 'Menu 8',
-	'menu9' => 'Menu 9',
+	'menu1'  => 'Menu 1',
+	'menu2'  => 'Menu 2',
+	'menu3'  => 'Menu 3',
+	'menu4'  => 'Menu 4',
+	'menu5'  => 'Menu 5',
+	'menu6'  => 'Menu 6',
+	'menu7'  => 'Menu 7',
+	'menu8'  => 'Menu 8',
+	'menu9'  => 'Menu 9',
 	'menu10' => 'Menu 10'
 ) );
 
@@ -138,14 +138,17 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 
 	$label_array = generate_taxonomy_label_array( $name_singular, $name_plural, $name_new );
 
+	$db_friendly_name_singular = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $name_singular); // Creates a version of the name in ascii
+	$db_friendly_name_plural = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $name_plural); // https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
+	
 	// taxonomy register
-	register_taxonomy( $name_plural, array( $content_type ), array(
+	register_taxonomy( $db_friendly_name_plural, array( $content_type ), array(
 		'hierarchical'       => $hierarcical,
 		'labels'             => $label_array,
 		'show_ui'            => true,
 		'show_admin_column'  => true,
 		'query_var'          => true,
-		'rewrite'            => array( 'singular' => $name_singular ),
+		'rewrite'            => array( 'singular' => $db_friendly_name ),
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
@@ -163,7 +166,7 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 function generate_taxonomy_label_array( $singular, $plural, $name_new ) {
 	return array(
 		'name'                       => _x( mb_ucfirst( $plural ), 'Overordnet navn' ),
-		'singular_name'              => _x( mb_ucfirst( $singular ), 'Navn i ental' ),
+		'singular_name'              => _x( mb_ucfirst( $singular ), 'Navn i ental' ), // Denne her er funcked
 		'search_items'               => __( 'Søg på ' . $plural ),
 		'all_items'                  => __( 'Alle ' . $plural ),
 		'parent_item'                => __( 'Forældre ' . $singular ),
@@ -237,8 +240,8 @@ function get_menu_name( $theme_location ) {
 	return $menu_obj->name;
 }
 
-function echo_menu_name($themelocation) {
-	echo get_menu_name($themelocation);
+function echo_menu_name( $themelocation ) {
+	echo get_menu_name( $themelocation );
 }
 
 ?>
