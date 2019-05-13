@@ -156,8 +156,8 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 
 function generate_taxonomy_label_array($singular, $plural, $name_new) {
 	return array(
-		'name'                       => _x( ucfirst($plural), 'Overordnet navn' ),
-		'singular_name'              => _x( ucfirst($singular), 'Navn i ental' ),
+		'name'                       => _x( mb_ucfirst($plural), 'Overordnet navn' ),
+		'singular_name'              => _x( mb_ucfirst($singular), 'Navn i ental' ),
 		'search_items'               => __( 'Søg på ' . $plural ),
 		'all_items'                  => __( 'Alle ' . $plural ),
 		'parent_item'                => __( 'Forældre ' . $singular ),
@@ -166,7 +166,7 @@ function generate_taxonomy_label_array($singular, $plural, $name_new) {
 		'update_item'                => __( 'Opdater ' . $singular ),
 		'add_new_item'               => __( 'Tilføj ' . $name_new . ' ' . $singular ),
 		'new_item_name'              => __( 'Navnet på den nye' . $singular ),
-		'menu_name'                  => __( ucfirst($plural) ),
+		'menu_name'                  => __( mb_ucfirst($plural) ),
 		'view_item'                  => __( 'Vis ' . $singular ),
 		'popular_items'              => __( 'Populære ' . $plural ),
 		'separate_items_with_commas' => __( 'Komma separerede ' . $plural ),
@@ -176,6 +176,16 @@ function generate_taxonomy_label_array($singular, $plural, $name_new) {
 		'back_to_items'              => ( 'Tilbage til ' . $plural )
 
 	);
+}
+/*
+ * A version of ucfirst converting multibyte (unicode) characters to upercase
+ * https://stackoverflow.com/questions/2517947/ucfirst-function-for-multibyte-character-encodings
+ */
+function mb_ucfirst($string) {
+	$strlen = mb_strlen($string);
+	$firstChar = mb_substr($string, 0, 1);
+	$then = mb_substr($string, 1, $strlen - 1);
+	return mb_strtoupper($firstChar) . $then;
 }
 
 add_action( 'init', 'create_custom_taxonomy', 0 );
