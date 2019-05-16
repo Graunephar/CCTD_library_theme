@@ -21,9 +21,11 @@ wp.data.subscribe(function () {
     if (isPublisSidebarOpened && !hasBeenOpened) {
         hasBeenOpened = true;
         checkFeaturedmediaAndShow();
+        toggleMessage();
         setInterval(() => {
+            hasBeenOpened = false;
         }, TIMEOUT);
-        displayMessageIfLocked();
+
     } // Retrigger
 
     if (isPublishable && !triggered) {
@@ -56,7 +58,7 @@ function createMessage() {
         'warning', // Can be one of: success, info, warning, error.
         'Vælg et udvalgt billede.', // Text string to display.
         {
-            isDismissible: true, // Whether the user can dismiss the notice.
+            isDismissible: false, // Whether the user can dismiss the notice.
             // Any actions the user can perform.
             id: FEATURED_NOTICE_ID,
             actions: [
@@ -69,7 +71,7 @@ function createMessage() {
     );
 }
 
-function displayMessageIfLocked() {
+function toggleMessage() {
     if (isLocked) {
 
         createMessage();
@@ -99,12 +101,12 @@ function checkFeaturedmediaAndShow() {
 
     if (featuredImageId === 0 || featuredImageId === undefined) {
         lock();
-        console.log("NO IMAGE");
 
     } else {
-        console.log("IMAGE");
         unlock();
+        removeMessage();
     }
+
 }
 
 
