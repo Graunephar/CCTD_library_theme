@@ -44,6 +44,4 @@ Template Name: Search Page
 
 
 
-
-
 <?php get_footer(); ?>

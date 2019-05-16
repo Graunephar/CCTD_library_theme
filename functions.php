@@ -190,7 +190,110 @@ function generate_taxonomy_label_array( $singular, $plural, $name_new ) {
 	);
 }
 
+
+/* CHECK FESTURED IMAGE */
+
+
+function wpds_check_thumbnail( $post_id ) {
+
+	// change to any custom post type
+	if ( get_post_type( $post_id ) != 'post' ) {
+		return;
+	}
+
+	if ( ! has_post_thumbnail( $post_id ) ) {
+		// set a transient to show the users an admin message
+		set_transient( "has_post_thumbnail", "no" );
+		// unhook this function so it doesn't loop infinitely
+		remove_action( 'save_post', 'wpds_check_thumbnail' );
+		// update the post set it to draft
+		wp_update_post( array( 'ID' => $post_id, 'post_status' => 'draft' ) );
+
+		add_action( 'save_post', 'wpds_check_thumbnail' );
+	} else {
+		delete_transient( "has_post_thumbnail" );
+	}
+}
+
 /*
+//https://www.isitwp.com/require-featured-image-can-publish-post/
+function wpds_thumbnail_error()
+{
+	// check if the transient is set, and display the error message
+	if ( get_transient( "has_post_thumbnail" ) == "no" ) {
+		echo "&lt;div id='message' class='error'&gt;&lt;p&gt;&lt;strong&gt;You must select Featured Image. Your Post is saved but it can not be published.&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;";
+		delete_transient( "has_post_thumbnail" );
+	}
+
+}
+
+add_action('save_post', 'wpds_check_thumbnail');
+add_action('admin_notices', 'wpds_thumbnail_error');
+
+function general_admin_notice(){
+	global $pagenow;
+
+		echo '<div class="notice notice-warning is-dismissible">
+             <p>This notice appears on the settings page.</p>
+         </div>';
+}
+add_action('admin_notices', 'general_admin_notice');
+*/
+
+
+/* ================================================== GUTENBERG ============================= */
+/**
+ *https://wordpress.org/gutenberg/handbook/designers-developers/developers/themes/theme-support/
+ */
+function mytheme_setup_theme_supported_features() {
+	add_theme_support( 'editor-color-palette', array(
+		array(
+			'name' => __( 'strong magenta', 'themeLangDomain' ), // SHOULD BE UPDATED TO AU COLORS
+			'slug' => 'strong-magenta',
+			'color' => '#a156b4',
+		),
+		array(
+			'name' => __( 'light grayish magenta', 'themeLangDomain' ),
+			'slug' => 'light-grayish-magenta',
+			'color' => '#d0a5db',
+		),
+		array(
+			'name' => __( 'very light gray', 'themeLangDomain' ),
+			'slug' => 'very-light-gray',
+			'color' => '#eee',
+		),
+		array(
+			'name' => __( 'very dark gray', 'themeLangDomain' ),
+			'slug' => 'very-dark-gray',
+			'color' => '#444',
+		),
+	) );
+
+	add_theme_support( 'align-wide' );
+
+}
+
+add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
+
+/**
+ * Loading custom javascript into gutenberg
+ * https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/
+ */
+function myguten_enqueue() {
+	wp_enqueue_script(
+		'CCTD-gutenberg-script',
+		get_template_directory_uri() . '/js/gutenberg-extensions.js',
+		array('wp-editor',  'wp-data', 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-hooks')
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
+
+
+
+/* ================================================== HELPERS =============================== */
+
+
+/**
  * A version of ucfirst converting multibyte (unicode) characters to upercase
  * https://stackoverflow.com/questions/2517947/ucfirst-function-for-multibyte-character-encodings
  */
@@ -201,6 +304,7 @@ function mb_ucfirst( $string ) {
 
 	return mb_strtoupper( $firstChar ) . $then;
 }
+
 /**
  * Creates a version of the name in ascii
  * https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
@@ -254,6 +358,9 @@ function echo_menu_name( $themelocation ) {
 }
 
 ?>
+
+
+
 
 
 
