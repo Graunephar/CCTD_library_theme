@@ -4,18 +4,12 @@ let triggered = false;
 let hasBeenOpened = false;
 const TIMEOUT = 3000;
 let isLocked = false;
+const FEATURED_NOTICE_ID = 'featured_notice';
 
 
-hook.addAction('transition_post_status', 'CCTD/Library', (one, two, three) => {
-    console.log("THREE");
-    window.alert("LOL");
-}, 10);
+//https://riad.blog/2018/06/07/efficient-client-data-management-for-wordpress-plugins/
 
-console.log(hook.hasAction('publish_post'));
-
-//hook.doAction('transition_post_status', 'hej', 'hej', 'hej');
-
-
+//https://github.com/WordPress/gutenberg/issues/4674#issuecomment-404587928
 
 //https://wordpress.stackexchange.com/questions/319054/trigger-javascript-on-gutenberg-block-editor-save
 wp.data.subscribe(function () {
@@ -51,15 +45,43 @@ wp.data.subscribe(function () {
     }
 });
 
+function removeMessage() {
+    wp.data.dispatch('core/notices').removeNotice(FEATURED_NOTICE_ID);
+}
 
+
+function createMessage() {
+    //https://developer.wordpress.org/block-editor/tutorials/notice
+    wp.data.dispatch('core/notices').createNotice(
+        'warning', // Can be one of: success, info, warning, error.
+        'Vælg et udvalgt billede.', // Text string to display.
+        {
+            isDismissible: true, // Whether the user can dismiss the notice.
+            // Any actions the user can perform.
+            id: FEATURED_NOTICE_ID,
+            actions: [
+                {
+                    url: 'https://en.support.wordpress.com/featured-images/',
+                    label: 'Du skal vælge et udvalgt billede inden forløbet kan udgives',
+                }
+            ]
+        }
+    );
+}
 
 function displayMessageIfLocked() {
+    if (isLocked) {
+
+        createMessage();
+
+    } else {
+        removeMessage();
+    }
 
 }
 
 function lock() {
     if (isLocked === false) {
-        console.log("LOCK");
         wp.data.dispatch('core/editor').lockPostSaving(POST_LOCK);
         isLocked = !isLocked;
     }
@@ -67,8 +89,7 @@ function lock() {
 
 function unlock() {
     if (isLocked === true) {
-        console.log("UNLOCK");
-        wp.data.dispatch( 'core/editor' ).unlockPostSaving(POST_LOCK);
+        wp.data.dispatch('core/editor').unlockPostSaving(POST_LOCK);
         isLocked = !isLocked;
     }
 }

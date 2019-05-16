@@ -283,7 +283,7 @@ function myguten_enqueue() {
 	wp_enqueue_script(
 		'CCTD-gutenberg-script',
 		get_template_directory_uri() . '/js/gutenberg-extensions.js',
-		array('wp-editor',  'wp-data', 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-hooks')
+		array('wp-editor',  'wp-data', 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-hooks', 'wp-notices')
 	);
 }
 add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
