@@ -6,5 +6,5 @@
 ?>
 
 <?php get_header(); ?>
-Whatever
+<h1>Vi kunne ikke finde det du leder efter</h1>
 <?php get_footer(); ?>
