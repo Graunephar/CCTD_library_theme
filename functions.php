@@ -151,7 +151,7 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 		'show_ui'            => true,
 		'show_admin_column'  => true,
 		'query_var'          => true,
-		'rewrite'            => array( 'singular' => $db_friendly_name ),
+		'rewrite'            => false,
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,

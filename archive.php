@@ -6,6 +6,7 @@
 ?>
 
 <?php get_header();  ?>
+<h1>Archive page</h1>
 <?php  the_archive_title( '<h1 class="archive-title">', '</h1>' ); ?>
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post();?>
 

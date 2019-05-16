@@ -1,12 +1,14 @@
 <?php
 /**
- * Wordpress category template
+ * Wordpress taxonomy template
  */
 
 ?>
-<h1>Category page</h1>
+
 <?php get_header();  ?>
-<?php  the_archive_title( '<h1 class="archive.php-title">', '</h1>' ); ?>
+
+<?php  the_archive_title( '<h1 class="archive-title">', '</h1>' ); ?>
+
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post();?>
 
 	<?php the_post_thumbnail(); ?>
