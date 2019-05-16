@@ -16,6 +16,7 @@ console.log(hook.hasAction('publish_post'));
 //hook.doAction('transition_post_status', 'hej', 'hej', 'hej');
 
 
+
 //https://wordpress.stackexchange.com/questions/319054/trigger-javascript-on-gutenberg-block-editor-save
 wp.data.subscribe(function () {
     var isSavingPost = wp.data.select('core/editor').isSavingPost();
@@ -28,6 +29,7 @@ wp.data.subscribe(function () {
         checkFeaturedmediaAndShow();
         setInterval(() => {
         }, TIMEOUT);
+        displayMessageIfLocked();
     } // Retrigger
 
     if (isPublishable && !triggered) {
@@ -50,25 +52,31 @@ wp.data.subscribe(function () {
 });
 
 
+
+function displayMessageIfLocked() {
+
+}
+
 function lock() {
-    if(isLocked === false) {
-       console.log("LOCK");
-       isLocked = !isLocked;
+    if (isLocked === false) {
+        console.log("LOCK");
+        wp.data.dispatch('core/editor').lockPostSaving(POST_LOCK);
+        isLocked = !isLocked;
     }
 }
 
 function unlock() {
-    if(isLocked === true) {
+    if (isLocked === true) {
         console.log("UNLOCK");
+        wp.data.dispatch( 'core/editor' ).unlockPostSaving(POST_LOCK);
         isLocked = !isLocked;
     }
 }
 
 function checkFeaturedmediaAndShow() {
     let featuredImageId = wp.data.select('core/editor').getEditedPostAttribute('featured_media');
-    console.log(featuredImageId);
 
-    if (featuredImageId === 0 || featuredImageId !== 'undefined') {
+    if (featuredImageId === 0 || featuredImageId === undefined) {
         lock();
         console.log("NO IMAGE");
 
@@ -77,7 +85,6 @@ function checkFeaturedmediaAndShow() {
         unlock();
     }
 }
-
 
 
 /*
