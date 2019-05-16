@@ -1,6 +1,5 @@
-const hook = wp.hooks.createHooks()
 const POST_LOCK = "CCTD_Lock";
-let triggered = false;
+let publishableTriggered = false;
 let hasBeenOpened = false;
 const TIMEOUT = 3000;
 let isLocked = false;
@@ -13,8 +12,6 @@ const FEATURED_NOTICE_ID = 'featured_notice';
 
 //https://wordpress.stackexchange.com/questions/319054/trigger-javascript-on-gutenberg-block-editor-save
 wp.data.subscribe(function () {
-    var isSavingPost = wp.data.select('core/editor').isSavingPost();
-    var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
     var isPublishable = wp.data.select('core/editor').isEditedPostPublishable();
     var isPublisSidebarOpened = wp.data.select('core/edit-post').isPublishSidebarOpened();
 
@@ -28,22 +25,13 @@ wp.data.subscribe(function () {
 
     } // Retrigger
 
-    if (isPublishable && !triggered) {
-        triggered = true;
+    if (isPublishable && !publishableTriggered) {
+        publishableTriggered = true;
         //hasBeenOpened = false;
         checkFeaturedmediaAndShow();
         setInterval(() => {
-            triggered = false;
+            publishableTriggered = false;
         }, TIMEOUT);
-    }
-
-    if (isSavingPost && !isAutosavingPost && !triggered) { // Make sure regular save and only trigger once
-        // Here goes your AJAX code ......
-        //triggered = true; // makes sure only triggered once
-        //checkFeaturedmediaAndShow();
-        //wp.data.dispatch('core/editor').lockPostSaving(POST_LOCK);
-
-
     }
 });
 
