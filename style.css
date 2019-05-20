@@ -108,7 +108,7 @@ h1, h2, h3, h4 {
 #content-wrapper {
     padding: 1em;
     flex-direction: column;
-    margin-top: 10%;
+    margin-top: 3em;
 }
 
 .wrapper {
@@ -239,4 +239,36 @@ h1, h2, h3, h4 {
 }
 
 
+/* ========== POSTS ============ */
 
+.a-post-container {
+    background-color: #90C;
+}
+
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 1rem;
+}
+
+
+.col-1 {
+    grid-column: span 1;
+}
+
+.col-2 {
+    grid-column: span 2;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.cards {
+    flex-direction: unset;
+}

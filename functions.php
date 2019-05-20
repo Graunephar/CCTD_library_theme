@@ -130,7 +130,6 @@ function create_custom_taxonomy() {
 	register_custom_taxonomy( 'projekt', 'projekter', 'nyt', 'post', false, 'hej' );
 	register_custom_taxonomy( 'niveau', 'niveauer', 'nyt', 'post', false, 'hej' );
 
-
 }
 
 add_action( 'init', 'create_custom_taxonomy', 0 );
@@ -159,7 +158,7 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 		'show_in_nav_menus'  => true,
 		'show_in_rest'       => true,
 		'show_in_quick_edit' => true,
-		'show_admin_column'  => true,
+		'show_admin_column'  => false, //Should mabe be true in future
 		'description'        => $description
 	) );
 
