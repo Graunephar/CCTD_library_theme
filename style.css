@@ -242,10 +242,32 @@ h1, h2, h3, h4 {
 
 /* ========== POSTS ============ */
 
-
-.card-columns {
-
-    @include media-breakpoint-only(md) {
-        column-count: 2 !important;
+/* https://stackoverflow.com/questions/34140793/bootstrap-4-responsive-cards-in-card-columns */
+@media (min-width: 576px) { /* small */
+    .card-columns {
+        column-count: 1;
     }
+}
+
+@media (min-width: 768px) { /* Medium */
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width: 992px) { /* large */
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1200px) { /* XL */
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
 }
