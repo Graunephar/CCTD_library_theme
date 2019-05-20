@@ -131,7 +131,7 @@ h1, h2, h3, h4 {
     padding-left: 0.5em;
 }
 
-.sidebar-menu:last-of-type{
+.sidebar-menu:last-of-type {
     margin-bottom: 2em;
 }
 
@@ -242,34 +242,10 @@ h1, h2, h3, h4 {
 
 /* ========== POSTS ============ */
 
-.a-post-container {
-    background-color: #90C;
-}
 
+.card-columns {
 
-.row {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: 1rem;
-}
-
-
-.col-1 {
-    grid-column: span 1;
-}
-
-.col-2 {
-    grid-column: span 2;
-}
-
-.col-3 {
-    grid-column: span 3;
-}
-
-.col-4 {
-    grid-column: span 4;
-}
-
-.cards {
-    flex-direction: unset;
+    @include media-breakpoint-only(md) {
+        column-count: 2 !important;
+    }
 }
