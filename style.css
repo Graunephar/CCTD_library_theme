@@ -106,7 +106,6 @@ h1, h2, h3, h4 {
     padding: 1em;
     flex-direction: column;
     margin-top: 3em;
-    max-width: 90%;
 }
 
 .wrapper {
@@ -245,6 +244,9 @@ h1, h2, h3, h4 {
     .card-columns {
         column-count: 1;
     }
+    #content-wrapper {
+            max-width: 90%;
+    }
 
 }
 
@@ -252,17 +254,27 @@ h1, h2, h3, h4 {
     .card-columns {
         column-count: 2;
     }
+    #content-wrapper {
+        max-width: 90%;
+    }
+
 }
 
 @media (min-width: 1500px) { /* large */
     .card-columns {
         column-count: 3;
     }
+    #content-wrapper {
+        max-width: 95%;
+    }
 }
 
 @media (min-width: 2000px) { /* XL */
     .card-columns {
         column-count: 4;
+    }
+    #content-wrapper {
+        max-width: 100%;
     }
 }
 
