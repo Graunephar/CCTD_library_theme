@@ -5,14 +5,12 @@
 
 ?>
 
-<?php get_header(); ?>
+<?php get_header();?>
+
 
 <?php the_archive_title( '<h1 class="archive-title">', '</h1>' ); ?>
 
-    <div class="cards">
-
-
-        <div class="container">
+    <div class="card-columns">
 
 			<?php if ( have_posts() ) : while ( have_posts() ) :
 				the_post(); ?>
@@ -44,12 +42,9 @@
 
         </div>
 
-
-    </div>
-
 <?php
 
-/*
+
 the_posts_pagination(
 	array(
 		'prev_text' => '<i class="fa fa-angle-left" aria-hidden="true"></i>',
@@ -57,8 +52,6 @@ the_posts_pagination(
 	)
 );
 
-
-*/
 ?>
 
 
