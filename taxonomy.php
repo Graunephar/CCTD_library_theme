@@ -26,7 +26,7 @@
                         </h5>
 
                         <p class="card-text">
-							<?php the_excerpt(); ?>
+							<?php echo excerpt(40); ?>
                         </p>
 
                         <a class="btn btn-primary" href="<?php the_permalink(); ?>">Se forløb</a>
@@ -42,17 +42,24 @@
 
         </div>
 
+<div class="card-page-bottom">
+
+
 <?php
 
 
 the_posts_pagination(
 	array(
-		'prev_text' => '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-		'next_text' => '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+		'prev_text' => '<a class="" aria-hidden="true">Næste</a>',
+		'next_text' => '<a class="" aria-hidden="true">Forrige</a>',
+        'mid_size' => 10,
+		'screen_reader_text' => 'Gå til side'
 	)
 );
 
 ?>
 
 
-<?php //get_footer(); ?>
+</div>
+
+<?php get_footer(); ?>

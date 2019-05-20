@@ -48,4 +48,4 @@
 
         </nav>
 
-        <div class="wrapper" id="content-wrapper">
+        <div class="d-flex" id="content-wrapper">
