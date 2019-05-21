@@ -394,6 +394,11 @@ function content( $limit ) {
  */
 require get_template_directory() . '/inc/template-tags.php';
 
+/**
+ * Taxonomy related stuff
+ */
+require get_template_directory() . '/inc/get-taxonomies.php';
+
 ?>
 
 
