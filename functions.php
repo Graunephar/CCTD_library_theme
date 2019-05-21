@@ -389,6 +389,11 @@ function content( $limit ) {
 	return $content;
 }
 
+/**
+ * Custom template tags for the theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
 ?>
 
 

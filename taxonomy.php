@@ -45,7 +45,7 @@
     <nav aria-label="Page navigation example">
 		<?php
 
-        require "theme_functions/wp-bootstrap-pagination-generator.php";
+        require "inc/wp-bootstrap-pagination-generator.php";
 
         $pagination = bootstrap_pagination_convert();
         echo $pagination;

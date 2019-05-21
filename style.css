@@ -291,3 +291,19 @@ h1, h2, h3, h4 {
     display: none;
 }
 
+
+/* ======== THE POST ===== */
+
+
+#post{
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.coverimage img {
+    object-fit: cover;
+    max-height: 400px;
+    width: 100%;
+}
+
+
