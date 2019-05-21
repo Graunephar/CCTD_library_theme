@@ -10,7 +10,7 @@ function bootstrap_pagination_convert(){
 	global $wp_query;
 
 
-	$links     = paginate_links( [
+	$pagelinks     = paginate_links( [
 			'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
 			'format'       => '?paged=%#%',
 			'current'      => max( 1, get_query_var( 'paged' ) ),
@@ -28,12 +28,12 @@ function bootstrap_pagination_convert(){
 	);
 
 
-	if ( is_array( $links ) ) {
+	if ( is_array( $pagelinks ) ) {
 
 		$pagination = '<div class="pagination"><ul class="pagination">';
 
-		foreach ( $links as $link ) {
-			$bootstrapstring =  str_replace( 'page-numbers', 'page-link', $link );
+		foreach ( $pagelinks as $pagelink ) {
+			$bootstrapstring =  str_replace( 'page-numbers', 'page-link', $pagelink );
 			$current = strpos($bootstrapstring, 'current');
 
 			$extraclasses = "";
@@ -49,7 +49,7 @@ function bootstrap_pagination_convert(){
 		$pagination .= '</ul></div>';
 
 	} else {
-		$pagination = $links;
+		$pagination = $pagelinks;
 	}
 
 
