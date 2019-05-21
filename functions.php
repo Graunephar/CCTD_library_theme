@@ -247,7 +247,7 @@ add_action('admin_notices', 'general_admin_notice');
 function mytheme_setup_theme_supported_features() {
 	add_theme_support( 'editor-color-palette', array(
 		array(
-			'name'  => __( 'strong magenta', 'themeLangDomain' ), // SHOULD BE UPDATED TO AU COLORS
+			'name'  => __( 'strong magenta', 'themeLangDomain' ), // TODO: SHOULD BE UPDATED TO AU COLORS
 			'slug'  => 'strong-magenta',
 			'color' => '#a156b4',
 		),
