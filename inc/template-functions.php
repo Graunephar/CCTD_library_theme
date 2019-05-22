@@ -123,4 +123,26 @@ function twentynineteen_get_avatar_size() {
 	return 60;
 }
 
+/**
+ * Add class to all img elements on page
+ * @param $content
+ *
+ * @return string
+ */
+function add_responsive_class($content){
+
+	$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+	$document = new DOMDocument();
+	libxml_use_internal_errors(true);
+	$document->loadHTML(utf8_decode($content));
+
+	$imgs = $document->getElementsByTagName('img');
+	foreach ($imgs as $img) {
+		$img->setAttribute('class','img-fluid');
+	}
+
+	$html = $document->saveHTML();
+	return $html;
+}
+
 ?>

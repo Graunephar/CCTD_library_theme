@@ -36,7 +36,7 @@ get_header(); ?>
                         <div class="entry-meta">
 							<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
                         </div><!-- .entry-meta -->
-                    <hr>
+                        <hr>
 					<?php
 					endif; ?>
 
@@ -47,9 +47,9 @@ get_header(); ?>
 					the_content( "Læs mere" . get_the_title() );
 
 					wp_link_pages( array(
-						'before' => '<div class="page-links">' . esc_html__( 'Sider:', 'CCTD' ),
-						'after'  => '</div>',
-                        'in_same_term' => true,
+						'before'       => '<div class="page-links">' . esc_html__( 'Sider:', 'CCTD' ),
+						'after'        => '</div>',
+						'in_same_term' => true,
 					) );
 					?>
 
@@ -70,6 +70,9 @@ get_header(); ?>
 			'next_text' => '%title →',
 		) );
 
+		?>
+        <hr>
+		<?php
 		// If comments are open or we have at least one comment, load up the comment template.
 		if ( comments_open() || get_comments_number() ) :
 			comments_template();
