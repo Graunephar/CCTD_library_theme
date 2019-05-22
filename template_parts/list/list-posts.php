@@ -5,7 +5,6 @@
 
 ?>
 
-<?php the_archive_title( '<h1 class="archive-title">', '</h1>' ); ?>
 
 <div class="card-columns">
 
