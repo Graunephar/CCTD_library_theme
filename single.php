@@ -71,7 +71,7 @@ get_header(); ?>
 			comments_template();
 		endif;
 
-		var_dump(get_taxonomy_array(get_post()->ID));
+		var_dump(get_taxonomy_array_links(get_post()->ID));
 
 	endwhile; // End of the loop.
 	?>

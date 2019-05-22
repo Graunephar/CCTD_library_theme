@@ -58,19 +58,20 @@ if ( ! function_exists( 'CCTD_formatet_taxonomy_list' ) ) :
 	function CCTD_formatet_taxonomy_list( $post_id, $seperator ) {
 
 
-		$taxonomies = get_taxonomy_array( $post_id );
+		$taxonomies = get_taxonomy_array( $post_id , true);
 		$result     = array();
 
-
 		if ( $taxonomies ) {
-			foreach ( $taxonomies as $taxonomy => $names ) {
+			foreach ( $taxonomies as $taxonomy => $content ) {
 
+				if( sizeof($content) == 0) continue; // If no content dont print
 				$string = "";
 
-				for ( $i = 0; $i < count( $names ); $i ++ ) {
-					$name   = $names[ $i ];
-					$string = $string . $name;
-					if ( $i !== count( $names ) - 1 ) {
+				for ( $i = 0; $i < count( $content ); $i ++ ) {
+					$name   = $content[$i]['name'];
+					$url   = $content[$i]['url'];
+					$string = $string . '<a href=' . $url . '">' . $name . '</a>';
+					if ( $i !== count( $content ) - 1 ) {
 						$string = $string . $seperator;
 					} // add seperator unless last key
 				}
@@ -99,18 +100,21 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 		if ( 'post' === get_post_type() ) {
 
 
+
+
+
 			$terms = CCTD_formatet_taxonomy_list( $post_id, ", " );
 
 			foreach ( $terms as $term => $content ) {
 				printf( '<div class="cat-links">' . $term . ': %1$s' . '</div>', $content );
 			}
-
+/*
 			$categories_list = get_the_category_list( ", " );
 
 			if ( $categories_list ) {
 				printf( '<div class="cat-links">' . esc_html__( 'Fag: %1$s', 'gutenbergtheme' ) . '</div>', $categories_list ); // WPCS: XSS OK.
 			}
-
+*/
 
 //			/* translators: used between list items, there is a space after the comma */
 //			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'gutenbergtheme' ) );
