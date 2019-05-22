@@ -50,15 +50,60 @@ if ( ! function_exists( 'gutenbergtheme_posted_on' ) ) :
 	}
 endif;
 
+
+if ( ! function_exists( 'CCTD_formatet_taxonomy_list' ) ) :
+	/**
+	 *Creates a list of taxonomies for printing in post
+	 */
+	function CCTD_formatet_taxonomy_list( $post_id, $seperator ) {
+
+
+		$taxonomies = get_taxonomy_array( $post_id );
+		$result     = array();
+
+
+		if ( $taxonomies ) {
+			foreach ( $taxonomies as $taxonomy => $names ) {
+
+				$string = "";
+
+				for ( $i = 0; $i < count( $names ); $i ++ ) {
+					$name   = $names[ $i ];
+					$string = $string . $name;
+					if ( $i !== count( $names ) - 1 ) {
+						$string = $string . $seperator;
+					} // add seperator unless last key
+				}
+				$result[ $taxonomy ] = $string;
+			}
+
+			return $result;
+		} else {
+			return null;
+		}
+
+
+	}
+
+endif;
+
+
 if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 	/**
-	 *LOL
+	 *Entry taxonomy list for post types
 	 */
-	function CCTD_entry_taxonomy($post_id) {
+	function CCTD_entry_taxonomy( $post_id ) {
 
 
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
+
+
+			$terms = CCTD_formatet_taxonomy_list( $post_id, ", " );
+
+			foreach ( $terms as $term => $content ) {
+				printf( '<div class="cat-links">' . $term . ': %1$s' . '</div>', $content );
+			}
 
 			$categories_list = get_the_category_list( ", " );
 
@@ -66,15 +111,14 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 				printf( '<div class="cat-links">' . esc_html__( 'Fag: %1$s', 'gutenbergtheme' ) . '</div>', $categories_list ); // WPCS: XSS OK.
 			}
 
-			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'gutenbergtheme' ) );
-			if ( $tags_list ) {
-				/* translators: 1: list of tags. */
-				printf( '<div class="tags-links">' . esc_html__( 'Emner:  %1$s', 'gutenbergtheme' ) . '</div>', $tags_list ); // WPCS: XSS OK.
-			}
-		}
 
-		//$taxonomy_list = get_the_terms($post_id, )
+//			/* translators: used between list items, there is a space after the comma */
+//			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'gutenbergtheme' ) );
+//			if ( $tags_list ) {
+//				/* translators: 1: list of tags. */
+//				printf( '<div class="tags-links">' . esc_html__( 'Emner:  %1$s', 'gutenbergtheme' ) . '</div>', $tags_list ); // WPCS: XSS OK.
+//			}
+		}
 
 	}
 

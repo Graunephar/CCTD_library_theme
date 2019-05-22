@@ -70,6 +70,9 @@ get_header(); ?>
 		if ( comments_open() || get_comments_number() ) :
 			comments_template();
 		endif;
+
+		var_dump(get_taxonomy_array(get_post()->ID));
+
 	endwhile; // End of the loop.
 	?>
 
