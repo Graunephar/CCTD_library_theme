@@ -11,12 +11,10 @@
 /**
  * Custom template tags for this theme
  *
- * Eventually, some of the functionality here could be replaced by core features.
- *
- * @package Gutenbergtheme
+ * @package CCTD Theme
  */
 
-if ( ! function_exists( 'gutenbergtheme_posted_on' ) ) :
+if ( ! function_exists( 'gutenbergtheme_posted_on' ) ) : //TODO Should this be removed?
 	/**
 	 * Prints HTML with meta information for the current post-date/time and author.
 	 */
@@ -58,18 +56,20 @@ if ( ! function_exists( 'CCTD_formatet_taxonomy_list' ) ) :
 	function CCTD_formatet_taxonomy_list( $post_id, $seperator ) {
 
 
-		$taxonomies = get_taxonomy_array( $post_id , true);
+		$taxonomies = get_taxonomy_array( $post_id, true );
 		$result     = array();
 
 		if ( $taxonomies ) {
 			foreach ( $taxonomies as $taxonomy => $content ) {
 
-				if( sizeof($content) == 0) continue; // If no content dont print
+				if ( sizeof( $content ) == 0 ) {
+					continue;
+				} // If no content dont print
 				$string = "";
 
 				for ( $i = 0; $i < count( $content ); $i ++ ) {
-					$name   = $content[$i]['name'];
-					$url   = $content[$i]['url'];
+					$name   = $content[ $i ]['name'];
+					$url    = $content[ $i ]['url'];
 					$string = $string . '<a href=' . $url . '">' . $name . '</a>';
 					if ( $i !== count( $content ) - 1 ) {
 						$string = $string . $seperator;
@@ -106,13 +106,13 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 				printf( '<div class="tax-links">' . $term . ': %1$s' . '</div>', $content );
 			}
 
-/*
-			$categories_list = get_the_category_list( ", " );
+			/*
+						$categories_list = get_the_category_list( ", " );
 
-			if ( $categories_list ) {
-				printf( '<div class="cat-links">' . esc_html__( 'Fag: %1$s', 'gutenbergtheme' ) . '</div>', $categories_list ); // WPCS: XSS OK.
-			}
-*/
+						if ( $categories_list ) {
+							printf( '<div class="cat-links">' . esc_html__( 'Fag: %1$s', 'gutenbergtheme' ) . '</div>', $categories_list ); // WPCS: XSS OK.
+						}
+			*/
 
 //			/* translators: used between list items, there is a space after the comma */
 //			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'gutenbergtheme' ) );
@@ -170,5 +170,59 @@ if ( ! function_exists( 'CCTD_entry_footer' ) ) :
 		);
 	}
 endif;
+
+
+if ( ! function_exists( 'CCTD_comment_form' ) ) :
+	/**
+	 * Documentation for function.
+	 */
+	function CCTD_comment_form( $order ) {
+		if ( true === $order || strtolower( $order ) === strtolower( get_option( 'comment_order', 'asc' ) ) ) {
+			comment_form(
+				array(
+					'logged_in_as' => null,
+					'title_reply'  => null,
+				)
+			);
+		}
+	}
+endif;
+
+
+if ( ! function_exists( 'twentynineteen_comment_avatar' ) ) :
+	/**
+	 * Returns the HTML markup to generate a user avatar.
+	 */
+	function twentynineteen_get_user_avatar_markup( $id_or_email = null ) {
+		if ( ! isset( $id_or_email ) ) {
+			$id_or_email = get_current_user_id();
+		}
+
+		return sprintf( '<div class="comment-user-avatar comment-author vcard">%s</div>', get_avatar( $id_or_email, twentynineteen_get_avatar_size() ) );
+	}
+endif;
+
+
+
+if ( ! function_exists( 'twentynineteen_discussion_avatars_list' ) ) :
+	/**
+	 * Displays a list of avatars involved in a discussion for a given post.
+	 */
+	function twentynineteen_discussion_avatars_list( $comment_authors ) {
+		if ( empty( $comment_authors ) ) {
+			return;
+		}
+		echo '<ol class="discussion-avatar-list">', "\n";
+		foreach ( $comment_authors as $id_or_email ) {
+			printf(
+				"<li>%s</li>\n",
+				twentynineteen_get_user_avatar_markup( $id_or_email )
+			);
+		}
+		echo '</ol><!-- .discussion-avatar-list -->', "\n";
+	}
+endif;
+
+
 
 ?>
