@@ -2,6 +2,8 @@
 /**
  * Wordpress category template
  */
-
-require "taxonomy.php";
 ?>
+
+<?php get_header(); ?>
+<?php get_template_part( 'template_parts/list/list', 'posts' ); ?>
+<?php get_footer(); ?>

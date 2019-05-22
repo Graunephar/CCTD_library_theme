@@ -19,12 +19,12 @@
 
             </div>
             <div class="col-lg-6 col-md-8 col-sm-8 top-buffer">
-                <?php require "searchbar.php"; ?>
+
+                <?php get_template_part('template_parts/search/search', 'bar'); ?>
 
             </div>
 
             <div class="col-lg-3 col-md-2 col-sm-2">
-
 
             </div>
         </div>

@@ -138,7 +138,7 @@ function add_responsive_class($content){
 
 	$imgs = $document->getElementsByTagName('img');
 	foreach ($imgs as $img) {
-		$img->setAttribute('class','img-fluid');
+		$img->setAttribute('class','img-fluid post-img');
 	}
 
 	$html = $document->saveHTML();

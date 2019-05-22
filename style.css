@@ -330,6 +330,19 @@ a {
 
 /* ======== THE POST ===== */
 
+/* Make images on big screens managegable */
+
+
+@media (min-width: 1800px) {
+    /* Medium */
+    .post-img{
+        display: block;
+        max-width: 50% !important;
+        height: auto;
+        margin: 0px auto;
+    }
+
+}
 
 #post {
     max-width: 100%;
