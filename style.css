@@ -76,6 +76,25 @@ h1, h2, h3, h4 {
 
 }
 
+.btn {
+    background-color: #003d73 !important;
+    border-color: lightgray;
+
+}
+
+.current {
+    background-color: #003d73 !important;
+    border-color: #003d73 !important;
+}
+
+/*    Orange upgrade. Looked aweful
+a {
+    color: #ee7f00;
+}
+
+.page-link {
+    color: #ee7f00;
+} */
 
 /* ============ SIDEBAR ====== */
 
@@ -238,7 +257,6 @@ h1, h2, h3, h4 {
 #search-btn {
     display: inline-flex;
     color: #fff;
-    background-color: #003d73;
 }
 
 .select2 {

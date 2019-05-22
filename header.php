@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="top-bar"> <!-- the top bar -->
             <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapseButton" class="navbar-btn btn-secondary">
+                <button type="button" id="sidebarCollapseButton" class="rounded navbar-btn btn-secondary border border-light">
                     <span></span>
                     <span></span>
                     <span></span>
