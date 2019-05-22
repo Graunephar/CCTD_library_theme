@@ -100,14 +100,12 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 		if ( 'post' === get_post_type() ) {
 
 
-
-
-
 			$terms = CCTD_formatet_taxonomy_list( $post_id, ", " );
 
 			foreach ( $terms as $term => $content ) {
-				printf( '<div class="cat-links">' . $term . ': %1$s' . '</div>', $content );
+				printf( '<div class="tax-links">' . $term . ': %1$s' . '</div>', $content );
 			}
+
 /*
 			$categories_list = get_the_category_list( ", " );
 

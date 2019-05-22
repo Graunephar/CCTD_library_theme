@@ -1,1 +1,1 @@
-LOL
+LOL jeg er en post.php

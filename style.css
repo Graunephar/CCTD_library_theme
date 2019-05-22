@@ -37,6 +37,7 @@ Text Domain: CCTD_Library
 
 body {
     height: 100%;
+    width: 100%;
     margin: 0;
     position: absolute;
     font-family: AU_passata_regular;
@@ -45,6 +46,38 @@ body {
 
 h1, h2, h3, h4 {
 }
+
+
+#menu-wrapper {
+    align-items: stretch;
+}
+
+#page-wrapper {
+    flex-grow: 1;
+    flex-direction: column;
+    width: 100%;
+}
+
+#content-wrapper {
+    padding: 1em;
+    flex-direction: column;
+    margin-top: 3em;
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+
+}
+
+#wrapper {
+    flex-direction: row;
+    width: 100%;
+
+}
+
+
+/* ============ SIDEBAR ====== */
 
 .sidebar-header img {
     max-width: 100%;
@@ -93,29 +126,6 @@ h1, h2, h3, h4 {
     margin: 5px auto;
 }
 
-#menu-wrapper {
-    align-items: stretch;
-}
-
-#page-wrapper {
-    flex-grow: 1;
-    flex-direction: column;
-}
-
-#content-wrapper {
-    padding: 1em;
-    flex-direction: column;
-    margin-top: 3em;
-}
-
-.wrapper {
-    display: flex;
-}
-
-#wrapper {
-    flex-direction: row;
-}
-
 
 #sidebar {
     min-width: 250px;
@@ -131,6 +141,9 @@ h1, h2, h3, h4 {
 .sidebar-menu:last-of-type {
     margin-bottom: 2em;
 }
+
+
+/* ======== TOPBAR ==== */
 
 #top-bar {
     position: fixed;
@@ -240,39 +253,44 @@ h1, h2, h3, h4 {
 /* ========== POSTS ============ */
 
 /* https://stackoverflow.com/questions/34140793/bootstrap-4-responsive-cards-in-card-columns */
-@media (min-width: 576px) { /* small */
+@media (min-width: 576px) {
+    /* small */
     .card-columns {
         column-count: 1;
     }
+
     #content-wrapper {
-            max-width: 90%;
     }
 
 }
 
-@media (min-width: 1100px) { /* Medium */
+@media (min-width: 1100px) {
+    /* Medium */
     .card-columns {
         column-count: 2;
     }
+
     #content-wrapper {
-        max-width: 90%;
     }
 
 }
 
-@media (min-width: 1500px) { /* large */
+@media (min-width: 1500px) {
+    /* large */
     .card-columns {
         column-count: 3;
     }
+
     #content-wrapper {
-        max-width: 95%;
     }
 }
 
-@media (min-width: 2000px) { /* XL */
+@media (min-width: 2000px) {
+    /* XL */
     .card-columns {
         column-count: 4;
     }
+
     #content-wrapper {
         max-width: 100%;
     }
@@ -287,7 +305,7 @@ h1, h2, h3, h4 {
 .post-pagination {
 }
 
-.screen-reader-text{
+.screen-reader-text {
     display: none;
 }
 
@@ -295,14 +313,44 @@ h1, h2, h3, h4 {
 /* ======== THE POST ===== */
 
 
-#post{
+#post {
     max-width: 100%;
     overflow: hidden;
 }
 
-.coverimage img {
+
+.coverimage > img {
     object-fit: cover;
     max-height: 400px;
+    width: 100% !important;
+}
+
+#post img {
+    width: 30%; /*TODO: Make responsive*/
+}
+
+.tax-links {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 1em;
+}
+
+.nav-next {
+    float: right;
+    display: inline-block;
+}
+
+.nav-previous {
+    display: inline-block;
+
+}
+
+.nav-links {
+    white-space: nowrap;
+}
+
+#post {
+
     width: 100%;
 }
 

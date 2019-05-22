@@ -11,53 +11,56 @@ get_header(); ?>
 
 	while ( have_posts() ) : the_post(); ?>
 
-        <article id="post">
-            <header class="entry-header">
+        <div class="d-flex">
+            <article id="post">
+                <header class="entry-header">
 
-				<?php
-				if ( is_singular() ) :
-					the_title( '<h1 class="entry-title">', '</h1>' );
-				else :
-					the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-				endif;
+					<?php
+					if ( is_singular() ) :
+						the_title( '<h1 class="entry-title">', '</h1>' );
+					else :
+						the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+					endif;
 
-				if ( has_post_thumbnail() ) : ?>
+					if ( has_post_thumbnail() ) : ?>
 
-                    <div class="coverimage">
-						<?php the_post_thumbnail() ?>
-                    </div>
+                        <div class="coverimage">
+							<?php the_post_thumbnail() ?>
+                        </div>
 
-				<?php
+					<?php
 
-				endif;
+					endif;
 
-				if ( 'post' === get_post_type() ) : ?>
-                    <div class="entry-meta">
-	                    <?php CCTD_entry_taxonomy(get_post()->ID); ?>
-                    </div><!-- .entry-meta -->
-				<?php
-				endif; ?>
+					if ( 'post' === get_post_type() ) : ?>
+                        <div class="entry-meta">
+							<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
+                        </div><!-- .entry-meta -->
+                    <hr>
+					<?php
+					endif; ?>
 
-            </header><!-- .entry-header -->
+                </header><!-- .entry-header -->
 
-            <div class="entry-content">
-				<?php
-				the_content( "Læs mere" . get_the_title());
+                <div class="entry-content">
+					<?php
+					the_content( "Læs mere" . get_the_title() );
 
-				wp_link_pages( array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'gutenbergtheme' ),
-					'after'  => '</div>',
-				) );
-				?>
+					wp_link_pages( array(
+						'before' => '<div class="page-links">' . esc_html__( 'Sider:', 'CCTD' ),
+						'after'  => '</div>',
+                        'in_same_term' => true,
+					) );
+					?>
 
-            </div><!-- .entry-content -->
+                </div><!-- .entry-content -->
 
 
-            <footer class="entry-footer">
-				<?php CCTD_entry_footer(); ?>
-            </footer><!-- .entry-footer -->
-        </article><!-- #post-<?php the_ID(); ?> -->
-
+                <footer class="entry-footer">
+					<?php CCTD_entry_footer(); ?>
+                </footer><!-- .entry-footer -->
+            </article><!-- #post-<?php the_ID(); ?> -->
+        </div>
 
 		<?php
 
@@ -66,12 +69,11 @@ get_header(); ?>
 			'prev_text' => '← %title',
 			'next_text' => '%title →',
 		) );
+
 		// If comments are open or we have at least one comment, load up the comment template.
 		if ( comments_open() || get_comments_number() ) :
 			comments_template();
 		endif;
-
-		var_dump(get_taxonomy_array_links(get_post()->ID));
 
 	endwhile; // End of the loop.
 	?>
