@@ -382,7 +382,7 @@ a {
 
 
 @media (min-width: 1800px) {
-    /* Medium */
+    /* XL */
     .post-img {
         display: block;
         max-width: 50% !important;
@@ -440,9 +440,38 @@ a {
 
 
 .search-page-container { /*TODO: Make responsive */
-    width: 30%;
+
+    margin-top: 1em;
+    margin-bottom: 1em;
 
 }
+
+/* ABove 2000 */
+@media (min-width: 1500px) {
+    .search-page-container{
+        width: 50%;
+        margin: 1em auto;
+        display:inline-block;
+    }
+
+    .search-page-aligner{
+        align-items: center;
+        text-align:center;
+
+    }
+}
+
+
+/* Below 1500 */
+@media (max-width: 1500px) {
+    .search-page-container{
+        min-width: 100%;
+    }
+}
+
+
+
+/* width: 30%;*/
 
 /*====== COMMENTS ============= */
 
