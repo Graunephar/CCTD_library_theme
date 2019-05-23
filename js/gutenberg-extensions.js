@@ -86,8 +86,9 @@ function unlock() {
 
 function checkFeaturedmediaAndShow() {
     let featuredImageId = wp.data.select('core/editor').getEditedPostAttribute('featured_media');
+    let posttype = wp.data.select('core/editor').getCurrentPostType();
 
-    if (featuredImageId === 0 || featuredImageId === undefined) {
+    if ((featuredImageId === 0 || featuredImageId === undefined) && posttype !== 'page') {
         lock();
 
     } else {
