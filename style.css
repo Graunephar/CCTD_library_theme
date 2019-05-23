@@ -287,7 +287,7 @@ a {
 }
 
 .top-buffer {
-    margin-top: 30%;
+    margin-top: 100px;
 }
 
 
@@ -374,6 +374,13 @@ a {
 .screen-reader-text {
     display: none;
 }
+
+#card-listing, #content-wrapper, #page-wrapper{
+    max-width: 100%; /* No fucking hotisontal scroll EVEEER */ 
+    overflow: hidden;
+}
+
+
 
 
 /* ======== THE POST ===== */
