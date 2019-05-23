@@ -16,7 +16,7 @@
 		foreach ( $all_terms as $valuearray ): ?>
 
             <option data-slug="<?php echo $valuearray['slug'] ?>" data-taxonomy="<?php echo $valuearray['taxonomy'] ?>"
-                    value="<?php echo $valuearray['name'] ?>"><?php echo $valuearray['name'] ?></option>
+                    value="<?php echo $valuearray['taxonomy'] . '|' . $valuearray['slug'] ?>"><?php echo $valuearray['name'] ?></option>
 		<?php endforeach; ?>
 
         </select>

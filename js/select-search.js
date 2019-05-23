@@ -2,6 +2,14 @@
  * Functionality for Select2 Search box
  */
 
+
+/**
+ * Dictionary containing every key that wordpress uses other terminology for in the url
+ * @type {{category: string, post_tag: string}}
+ */
+const wordpress_slug_url_dictionary = {'category': 'category_name', 'post_tag': 'tag'};
+
+
 $(document).ready(function () {
     $('.select2-search').select2({
         language: "da",
@@ -23,28 +31,64 @@ $(document).ready(function () {
     refill_serach_box_if_serach();
 
 
-
 });
 
 function refill_serach_box_if_serach() {
 
-    let x = location.search;
+    let query = location.search;
 
-    if(x != "") {
+    if (query != "") {
 
-        let terms = get_serach_paramarray();
+        let terms = get_search_paramarray(query);
 
-        $('#search-box').val('Matematiks'); // Select the option with a value of '1'
+        let selection = []; // The elements soon to be selected
+        for (let taxonomy in terms){
+            let values = terms[taxonomy];
+
+            for(let value of values){
+
+                let wp_taxonomy  = from_wordpress_url_to_slugs(taxonomy);
+                let elementvalue = wp_taxonomy+ '|' + value; // Recreate the value attribute printed in options in serach-bar.php
+                selection.push(elementvalue);
+            }
+        }
+
+        $('#search-box').val(selection); // Select the option with th given value
         $('#search-box').trigger('change'); // Notify any JS components that the value changed
     }
 
 }
 
+function get_taxonomy_object(querydata) {
 
-function get_serach_paramarray() {
+    let taxonomyslug = querydata[0]; // gets taxonomy slug
+    let terms = querydata[1].split('+'); // Gets the values for the terms, seperated by + in the url
+
+    let values = [];
+    for (let i = 0; i < terms.length; i++) {    // Gets the value for the term.
+        values.push(terms[i]); //Places the value of the term in index
+    }
+
+    return {[taxonomyslug]: values};
 
 }
 
+function get_search_paramarray(query_string) {
+
+    let params = query_string.split("&");
+
+    params.splice(0, 1); // remove serach part of query ie = "?s="
+
+    let parameters = {};
+    for (let param of params) {
+        let terms = param.split("=");
+        let taxarray = get_taxonomy_object(terms);
+        Object.assign(parameters, taxarray);
+    }
+
+    return parameters;
+
+}
 
 
 function get_the_terms_and_search() {
@@ -52,7 +96,7 @@ function get_the_terms_and_search() {
 
     let values = $('#search-box').find(':selected');
 
-    let sorted_search_terms = sort_values(values);
+    let sorted_search_terms = get_option_values_and_sort(values);
 
     let url = build_query_url(sorted_search_terms);
 
@@ -62,7 +106,7 @@ function get_the_terms_and_search() {
 }
 
 
-function sort_values(values) {
+function get_option_values_and_sort(values) {
 
     let sorted_search_terms = {};
     for (let value of values) {
@@ -109,7 +153,7 @@ function build_query_url(sorted_search_terms) {
     let i = 0;
     let arraylenght = Object.keys(sorted_search_terms).length;
     for (let key in sorted_search_terms) { // N ow do URL
-        let termname = remap_wordpress_terms(key); // remap to wordpress url terminology
+        let termname = from_wordpress_slugs_to_url(key); // remap to wordpress url terminology
         let termvaluestring = create_term_query_string(sorted_search_terms[key]);
         url += termname + '=' + termvaluestring;
         if (i < arraylenght - 1) url += '&'; //Not last taxonomy
@@ -122,13 +166,50 @@ function build_query_url(sorted_search_terms) {
 
 }
 
+
+
 /**
  * Remapping slug names from database to terminology taht can be used in url
  * @returns {string} name of the same term used in  urls
  */
-function remap_wordpress_terms(key) {
-    if (key === 'category') return 'category_name';
-    else if (key === 'post_tag') return 'tag';
-    else return key;
+function from_wordpress_slugs_to_url(key) {
+    return check_dictionary_otherwise_return_key(wordpress_slug_url_dictionary, key);
+
 }
 
+
+/**
+ * Remapping url names from database to terminology can be used in values
+ * @returns {string} name of the same term used in  urls
+ */
+
+function from_wordpress_url_to_slugs(key) {
+    let inverted = invert_dictionary(wordpress_slug_url_dictionary);
+    let newkey = check_dictionary_otherwise_return_key(inverted, key); // because inverted this is actually the original value, we need the key
+
+    if(newkey === key) return key;
+
+    return inverted[key]
+
+}
+
+function check_dictionary_otherwise_return_key(dictionary, key) {
+    console.log(dictionary);
+    if(dictionary[key] === undefined) return key;
+    else return dictionary[key];
+}
+
+
+
+function invert_dictionary (obj) {
+
+    var new_obj = {};
+
+    for (var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            new_obj[obj[prop]] = prop;
+        }
+    }
+
+    return new_obj;
+}
