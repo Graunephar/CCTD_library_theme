@@ -142,7 +142,7 @@ function register_custom_taxonomy( $name_singular, $name_plural, $name_new, $con
 	$db_friendly_name_plural   = remove_bad_chard( $name_plural ); // https://alvinalexander.com/php/how-to-remove-non-printable-characters-in-string-regex
 
 	// taxonomy register
-	register_taxonomy( $db_friendly_name_plural, array( $content_type ), array(
+	register_taxonomy( $db_friendly_name_singular, array( $content_type ), array(
 		'hierarchical'       => $hierarcical,
 		'labels'             => $label_array,
 		'show_ui'            => true,

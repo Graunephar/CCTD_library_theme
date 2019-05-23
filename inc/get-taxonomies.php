@@ -3,14 +3,13 @@
 
 function get_all_taxonomy_names() {
 
-
 	$taxonomies = get_all_taxonomy_type_names();
 	$result     = array();
 
 	foreach ( $taxonomies as $taxonomy ) {
-		$terms = get_terms( array( //Get all terms (all 'labels') for each taxonomy
+		$terms = get_terms( array( //Get all terms (all instances of) for each taxonomy
 			'taxonomy'   => $taxonomy,
-			'hide_empty' => false, // Should proberbly be true in production
+			'hide_empty' => false, // Should probably be true in production
 		) );
 
 		$names = array_map( 'get_taxonomy_name', $terms );
@@ -20,6 +19,40 @@ function get_all_taxonomy_names() {
 
 	return array_filter( $result );
 }
+
+
+function get_all_taxonomy_names_and_types() {
+	$taxonomynames = get_all_taxonomy_type_names();
+	$result        = array();
+
+	foreach ( $taxonomynames as $name ) {
+		$terms          = get_terms( array( //Get all terms (all instances of) for each taxonomy
+			'taxonomy'   => $name,
+			'hide_empty' => true, // Should probably be true in production
+		) );
+		$taxonomyarrays = array_map( 'get_taxonomy_name_and_type_array', $terms );
+
+		$result = array_merge( $result, $taxonomyarrays );
+	}
+
+	return array_filter( $result );
+}
+
+
+function get_taxonomy_name_and_type_array( WP_Term $term ) {
+	if ( $term->slug == 'uncategorized' ) { //Dont show uncategorized category
+		return null;
+	}
+
+	$taxonomy = $term->taxonomy;
+	$slug     = $term->slug;
+	$name     = $term->name;
+
+	return array( 'name' => $name, 'slug' => $slug, 'taxonomy' => $taxonomy );
+
+
+}
+
 
 function get_taxonomy_name( WP_Term $term ) {
 	if ( $term->slug != 'uncategorized' ) { //Dont show uncategorised category
@@ -61,9 +94,6 @@ function get_all_taxonomy_type_objects() {
 }
 
 
-
-
-
 function get_taxonomy_terms_links( $taxonomy, $post_id ) {
 
 	$terms  = get_the_terms( $post_id, $taxonomy->name );
@@ -72,25 +102,25 @@ function get_taxonomy_terms_links( $taxonomy, $post_id ) {
 	if ( $terms && $terms != null ) {
 		foreach ( $terms as $term ) {
 
-			array_push( $result, array('name' => $term->name,'url' => get_taxonomy_url($taxonomy, $term)));
+			array_push( $result, array( 'name' => $term->name, 'url' => get_taxonomy_url( $taxonomy, $term ) ) );
 		}
 
 	}
 
-	return array( $taxonomy->labels->name => $result);
+	return array( $taxonomy->labels->name => $result );
 
 }
 
 
-function get_taxonomy_url($taxonomy, $term){
+function get_taxonomy_url( $taxonomy, $term ) {
 	$url = get_site_url() . '/';
 
 	$type = $taxonomy->name;
-	if($type == 'category') {
+	if ( $type == 'category' ) {
 
 		$url = $url . 'category/' . $term->name;
 
-	} elseif ($type == 'post_tag') {
+	} elseif ( $type == 'post_tag' ) {
 
 
 		$url = $url . 'tag/' . $term->name;
@@ -107,7 +137,6 @@ function get_taxonomy_url($taxonomy, $term){
 }
 
 
-
 /**
  * Get all taxonomies and their vaklues applied to a specifik post
  *
@@ -115,7 +144,7 @@ function get_taxonomy_url($taxonomy, $term){
  *
  * @return array with taxonomy labels as keys and arrays with names of each taxonomy as values, for a specifik post
  */
-function get_taxonomy_array($post_id, $links) {
+function get_taxonomy_array( $post_id, $links ) {
 	$taxonomies = get_all_taxonomy_type_objects();
 
 
@@ -125,8 +154,11 @@ function get_taxonomy_array($post_id, $links) {
 
 		foreach ( $taxonomies as $taxonomy ) {
 
-			if($links) $terms = get_taxonomy_terms_links( $taxonomy, $post_id );
-			else $terms = get_taxonomy_terms( $taxonomy, $post_id );
+			if ( $links ) {
+				$terms = get_taxonomy_terms_links( $taxonomy, $post_id );
+			} else {
+				$terms = get_taxonomy_terms( $taxonomy, $post_id );
+			}
 
 			$result = array_merge( $result, $terms );
 
