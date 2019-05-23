@@ -436,6 +436,14 @@ a {
     width: 100%;
 }
 
+/* ================= SEARCH PAGE ============= */
+
+
+.search-page-container { /*TODO: Make responsive */
+    width: 30%;
+
+}
+
 /*====== COMMENTS ============= */
 
 
