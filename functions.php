@@ -99,26 +99,6 @@ function rename_categories() {
 add_action( 'init', 'rename_categories' );
 
 
-/**
- * Register our sidebars and widgetized areas.
- *
- */
-function all_widgets_init() {
-
-	register_sidebar( array( /* Custom text area on front page */
-		'name'          => 'Forside',
-		'id'            => 'home_center',
-		'before_widget' => '<div>',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2>',
-		'after_title'   => '</h2>',
-	) );
-
-}
-
-add_action( 'widgets_init', 'all_widgets_init' );
-
-
 //https://www.wpblog.com/create-custom-taxonomies-in-wordpress/
 //create a custom taxonomy name
 function create_custom_taxonomy() {
