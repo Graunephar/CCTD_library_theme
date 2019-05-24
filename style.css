@@ -438,12 +438,14 @@ a {
 
 .download-link-container {
     text-align: center;
+    background-color: #cccccc;
+    padding: 1em 0.5em 1em 0.5em;
+    margin: 1em;
     float: right;
-    background-color: #9fa4a6;
 }
 
 .download-link {
-    margin: .2em;
+    margin: .2em 0em .2em 0em;
     display: inline-block;
     font-size: 14px;
 }
@@ -462,16 +464,44 @@ a {
 
 }
 
-#meta-row{
+#meta-row {
     min-width: 100% !important;
 }
 
-.upload-label{
+.upload-label {
 
 }
 
-.label-wrapper{
+.label-wrapper {
     text-align: center;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    .download-link {
+        width: 90%;
+    }
+
+    .download-link-container {
+        float: none !important;
+
+    }
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }
 
 /* ================= SEARCH PAGE ============= */
