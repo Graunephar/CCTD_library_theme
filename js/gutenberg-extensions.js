@@ -97,3 +97,23 @@ function checkFeaturedmediaAndShow() {
     }
 
 }
+
+//Change text on file upload button
+
+$(function () { // on document ready, the recommended way
+
+    //.first().attr('class', 'lolol');
+    rename_all_buttons();
+    $('.add-clone').click(rename_all_buttons);
+
+
+
+
+});
+
+function rename_all_buttons() {
+    setTimeout(() => {
+        $('.rwmb-media-add a').text("Upload fil til forløb");
+    }, 500);
+
+}

@@ -266,6 +266,34 @@ function myguten_enqueue() {
 
 add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
 
+function CCTD_file_upload_meta_box( $meta_boxes ) { // register meta boxes with the Meta Box plugin!
+	$prefix = 'cctd-upload-prefix-';
+
+	$meta_boxes[] = array(
+		'id'         => 'cctd-file-upload',
+		'title'      => esc_html__( 'Upload filer til forløb', 'cctd-file-upload-meta-box' ),
+		'post_types' => array( 'post' ),
+		'context'    => 'side',
+		'priority'   => 'high',
+		'autosave'   => 'false',
+		'fields'     => array(
+			array(
+				'id'    => $prefix . 'file_input',
+				'type'  => 'file_advanced',
+				'name'  => esc_html__( 'Vælg filerne til forløbet', 'cctd-file-upload-meta-box' ),
+				'class' => 'cctd-file-upload',
+				'clone' =>  true,
+				'add_button' => 'Tilføj flere filer',
+
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+
+add_filter( 'rwmb_meta_boxes', 'CCTD_file_upload_meta_box' );
+
 /* ================================================== POSTS ================================= */
 
 add_filter( 'the_content', 'add_responsive_class' );
