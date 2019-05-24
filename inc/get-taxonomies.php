@@ -112,23 +112,25 @@ function get_taxonomy_terms_links( $taxonomy, $post_id ) {
 }
 
 
-function get_taxonomy_url( $taxonomy, $term ) {
+function get_taxonomy_url( $taxonomy, $term ) { //TODO: SHopuld proberbly just read the documentation and do this correct
 	$url = get_site_url() . '/';
 
-	$type = $taxonomy->name;
+	$term_name = danish_letter_url_rewrite( $term->name );
+
+	$type = danish_letter_url_rewrite( $taxonomy->name );
 	if ( $type == 'category' ) {
 
-		$url = $url . 'category/' . $term->name;
+		$url = $url . 'category/' . $term_name;
 
 	} elseif ( $type == 'post_tag' ) {
 
 
-		$url = $url . 'tag/' . $term->name;
+		$url = $url . 'tag/' . $term_name;
 
 
 	} else {
 
-		$url = $url . '?' . $type . '=' . $term->name;
+		$url = $url . '?' . $type . '=' . $term_name;
 
 	}
 
@@ -186,6 +188,19 @@ function get_taxonomy_terms( $taxonomy, $post_id ) {
 
 	return array( $taxonomy->labels->name => $result );
 
+}
+
+
+function danish_letter_url_rewrite( $url ) {
+	$url = strtolower( $url );
+	$url = str_replace( 'æ', 'ae', $url );
+	$url = str_replace( 'ø', 'oe', $url );
+	$url = str_replace( 'å', 'aa', $url );
+	$url = str_replace( 'Æ', 'ae', $url );
+	$url = str_replace( 'Ø', 'oe', $url );
+	$url = str_replace( 'Å', 'aa', $url );
+
+	return urlencode( $url );
 }
 
 ?>

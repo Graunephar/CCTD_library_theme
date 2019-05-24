@@ -99,7 +99,6 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
-
 			$terms = CCTD_formatet_taxonomy_list( $post_id, ", " );
 
 			foreach ( $terms as $term => $content ) {
