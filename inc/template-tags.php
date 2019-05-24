@@ -103,7 +103,7 @@ if ( ! function_exists( 'CCTD_entry_taxonomy' ) ) :
 			$terms = CCTD_formatet_taxonomy_list( $post_id, ", " );
 
 			foreach ( $terms as $term => $content ) {
-				printf( '<div class="tax-links">' . $term . ': %1$s' . '</div>', $content );
+				printf( '<span class="tax-link">' . $term . ': %1$s' . '</span>', $content );
 			}
 
 			/*

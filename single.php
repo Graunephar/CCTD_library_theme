@@ -23,18 +23,15 @@ get_header(); ?>
 					endif;
 
 					if ( has_post_thumbnail() ) : ?>
-
                         <div class="coverimage">
 							<?php the_post_thumbnail() ?>
                         </div>
-
 					<?php
-
 					endif;
 
 					if ( 'post' === get_post_type() ) : ?>
                         <div class="entry-meta">
-							<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
+								<?php get_template_part( 'template_parts/content/post', 'meta' ) ?>
                         </div><!-- .entry-meta -->
                         <hr>
 					<?php

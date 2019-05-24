@@ -375,12 +375,10 @@ a {
     display: none;
 }
 
-#card-listing, #content-wrapper, #page-wrapper{
-    max-width: 100%; /* No fucking hotisontal scroll EVEEER */ 
+#card-listing, #content-wrapper, #page-wrapper {
+    max-width: 100%; /* No fucking hotisontal scroll EVEEER */
     overflow: hidden;
 }
-
-
 
 
 /* ======== THE POST ===== */
@@ -418,11 +416,6 @@ a {
     max-width: 100%;
 }
 
-.tax-links {
-    display: inline-block;
-    margin-right: 10px;
-    margin-top: 1em;
-}
 
 .nav-next {
     float: right;
@@ -434,13 +427,53 @@ a {
 
 }
 
-.nav-links {
+.nav-link {
     white-space: nowrap;
 }
 
 #post {
 
     width: 100%;
+}
+
+.download-link-container {
+    width: 30%;
+
+
+
+    text-align: center;
+}
+
+.download-link {
+    margin: .2em;
+    display: inline-block;
+    font-size: 14px;
+}
+
+
+.tax-link {
+    margin-right: 10px;
+    margin-top: 1em;
+}
+
+.tax-link-container {
+
+}
+
+.entry-meta {
+
+}
+
+#meta-row{
+    min-width: 100% !important;
+}
+
+.upload-label{
+
+}
+
+.label-wrapper{
+    text-align: center;
 }
 
 /* ================= SEARCH PAGE ============= */
@@ -455,15 +488,15 @@ a {
 
 /* ABove 2000 */
 @media (min-width: 1500px) {
-    .search-page-container{
+    .search-page-container {
         width: 50%;
         margin: 1em auto;
-        display:inline-block;
+        display: inline-block;
     }
 
-    .search-page-aligner{
+    .search-page-aligner {
         align-items: center;
-        text-align:center;
+        text-align: center;
 
     }
 }
@@ -471,11 +504,10 @@ a {
 
 /* Below 1500 */
 @media (max-width: 1500px) {
-    .search-page-container{
+    .search-page-container {
         min-width: 100%;
     }
 }
-
 
 
 /* width: 30%;*/
