@@ -437,11 +437,9 @@ a {
 }
 
 .download-link-container {
-    width: 30%;
-
-
-
     text-align: center;
+    float: right;
+    background-color: #9fa4a6;
 }
 
 .download-link {
