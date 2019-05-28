@@ -131,6 +131,8 @@ function twentynineteen_get_avatar_size() {
  */
 function add_responsive_class($content){
 
+	if($content == "") return;
+
 	$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
 	$document = new DOMDocument();
 	libxml_use_internal_errors(true);
