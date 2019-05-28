@@ -56,6 +56,7 @@ h1, h2, h3, h4 {
     flex-grow: 1;
     flex-direction: column;
     width: 100%;
+
 }
 
 #content-wrapper {
@@ -68,11 +69,14 @@ h1, h2, h3, h4 {
 .wrapper {
     display: flex;
 
+
 }
 
 #wrapper {
     flex-direction: row;
     width: 100%;
+    min-height: 100%;
+
 
 }
 
@@ -149,7 +153,7 @@ a {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    min-height: 100%;;
+    min-height: 100%;
     background: #003d73;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);

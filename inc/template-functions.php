@@ -131,7 +131,7 @@ function twentynineteen_get_avatar_size() {
  */
 function add_responsive_class($content){
 
-	if($content == "") return;
+	if($content == "") return; // if there are no content (eg this is called from the "create post" action. Just exit
 
 	$content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
 	$document = new DOMDocument();
