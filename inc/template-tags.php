@@ -69,7 +69,7 @@ if ( ! function_exists( 'CCTD_formatet_taxonomy_list' ) ) :
 
 				for ( $i = 0; $i < count( $content ); $i ++ ) {
 					$name   = $content[ $i ]['name'];
-					$url    = $content[ $i ]['url'];
+					$url    = $content[ $i ]['url']; // TODO: Make sure cpaces is ourcommented here
 					$string = $string . '<a href=' . $url . '">' . $name . '</a>';
 					if ( $i !== count( $content ) - 1 ) {
 						$string = $string . $seperator;
