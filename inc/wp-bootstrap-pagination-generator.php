@@ -5,12 +5,12 @@
  *
  * https://gist.github.com/mtx-z/f95af6cc6fb562eb1a1540ca715ed928
  */
-function bootstrap_pagination_convert(){
+function bootstrap_pagination_convert() {
 
 	global $wp_query;
 
 
-	$pagelinks     = paginate_links( [
+	$pagelinks = paginate_links( [
 			'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
 			'format'       => '?paged=%#%',
 			'current'      => max( 1, get_query_var( 'paged' ) ),
@@ -20,8 +20,8 @@ function bootstrap_pagination_convert(){
 			'end_size'     => 3,
 			'mid_size'     => 1,
 			'prev_next'    => true,
-			'prev_text' => '&#171; Forrige',
-			'next_text' => 'Næste &#187;',
+			'prev_text'    => '&#171; Forrige',
+			'next_text'    => 'Næste &#187;',
 			'add_args'     => false,
 			'add_fragment' => ''
 		]
@@ -33,12 +33,12 @@ function bootstrap_pagination_convert(){
 		$pagination = '<div class="pagination"><ul class="pagination">';
 
 		foreach ( $pagelinks as $pagelink ) {
-			$bootstrapstring =  str_replace( 'page-numbers', 'page-link', $pagelink );
-			$current = strpos($bootstrapstring, 'current');
+			$bootstrapstring = str_replace( 'page-numbers', 'page-link', $pagelink );
+			$current         = strpos( $bootstrapstring, 'current' );
 
 			$extraclasses = "";
 
-			if($current) {
+			if ( $current ) {
 
 				$extraclasses = " active";
 			}
@@ -53,10 +53,9 @@ function bootstrap_pagination_convert(){
 	}
 
 
-return $pagination;
+	return $pagination;
 
 }
-
 
 
 ?>
