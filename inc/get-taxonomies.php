@@ -117,6 +117,8 @@ function get_taxonomy_url( $taxonomy, $term ) { //TODO: SHopuld proberbly just r
 
 	$term_name = danish_letter_url_rewrite( $term->name );
 
+	$term_name = str_replace('+', '-', $term_name);
+
 	$type = danish_letter_url_rewrite( $taxonomy->name );
 	if ( $type == 'category' ) {
 
@@ -152,7 +154,6 @@ function get_taxonomy_array( $post_id, $links ) {
 
 	$result = array();
 	if ( $taxonomies ) {
-
 
 		foreach ( $taxonomies as $taxonomy ) {
 
