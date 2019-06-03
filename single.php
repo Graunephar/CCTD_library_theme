@@ -41,7 +41,6 @@ get_header(); ?>
 
                 <div class="entry-content">
 					<?php
-
 					get_template_part( 'template_parts/content/post', 'files');
 
 					the_content( "Læs mere" . get_the_title() );

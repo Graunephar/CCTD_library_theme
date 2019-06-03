@@ -446,6 +446,7 @@ a {
     padding: 1em 0.5em 1em 0.5em;
     margin: 1em;
     float: right;
+    clear: both;
 }
 
 .download-link {
@@ -454,6 +455,10 @@ a {
     font-size: 14px;
 }
 
+.author-label {
+    display: block;
+    margin-top: 1em;
+}
 
 .tax-link {
     margin-right: 10px;
