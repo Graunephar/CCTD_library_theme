@@ -40,9 +40,6 @@ function get_all_taxonomy_names_and_types() {
 
 
 function get_taxonomy_name_and_type_array( WP_Term $term ) {
-	if ( $term->slug == 'uncategorized' ) { //Dont show uncategorized category
-		return null;
-	}
 
 	$taxonomy = $term->taxonomy;
 	$slug     = $term->slug;
