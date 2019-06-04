@@ -167,6 +167,21 @@ function generate_taxonomy_label_array( $singular, $plural, $name_new ) {
 	);
 }
 
+/* ================================================== UPLOAD FILE TYPES ===================== */
+
+//https://andrew.dev/how-to-add-a-new-mime-type-to-wordpress/
+//https://codex.wordpress.org/Function_Reference/get_allowed_mime_types
+//
+function CCTD_upload_mimes( $existing_mimes ) {
+	// Add webm to the list of mime types.
+	$existing_mimes['nlogo'] = 'text/plain'; // Allow the upload of Netlogo files https://www.iana.org/assignments/media-types/media-types.xhtml#application
+	//https://www.sitepoint.com/mime-types-complete-list/
+
+
+	// Return the array back to the function with our added mime type.
+	return $existing_mimes;
+}
+add_filter( 'mime_types', 'CCTD_upload_mimes' );
 
 /* ================================================== GUTENBERG ============================= */
 /**
