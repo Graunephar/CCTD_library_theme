@@ -249,7 +249,6 @@ function CCTD_file_upload_meta_box( $meta_boxes ) { // register meta boxes with 
 				'class' => 'cctd-file-upload',
 				'clone' =>  true,
 				'add_button' => 'Tilføj flere filer',
-
 			),
 		),
 	);

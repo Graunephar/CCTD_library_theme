@@ -14,7 +14,7 @@
 				?>
 
                 <a class="btn btn-primary btn-lg download-link"
-                   href="<?php echo $file['url']; ?>"><?php echo $file['name']; ?></a>
+                   href="<?php echo $file['url']; ?>"><?php echo $file['title']; ?></a>
 
 			<?php
 			endforeach;
