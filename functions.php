@@ -104,7 +104,7 @@ function create_custom_taxonomy() {
 	register_custom_taxonomy( 'uddannelsestype', 'uddannelsestyper', 'ny', 'post', false, 'hej' );
 	register_custom_taxonomy( 'årgang', 'årgange', 'ny', 'post', false, 'hej' );
 	register_custom_taxonomy( 'teknologi', 'teknologier', 'ny', 'post', false, 'hej' );
-	register_custom_taxonomy( 'projekt', 'projekter', 'nyt', 'post', false, 'hej' );
+	register_custom_taxonomy( 'projekt', 'projekt', 'nyt', 'post', false, 'hej' );
 	register_custom_taxonomy( 'niveau', 'niveauer', 'nyt', 'post', false, 'hej' );
 	register_custom_taxonomy( 'skoleår', 'skoleår', 'nyt', 'post', false, 'hej' );
 
