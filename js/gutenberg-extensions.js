@@ -4,6 +4,8 @@ let hasBeenOpened = false;
 const TIMEOUT = 3000;
 let isLocked = false;
 const FEATURED_NOTICE_ID = 'featured_notice';
+let initalstartuptimepassed = false;
+const INITIAL_STARTUP_TIME = 1000;
 
 
 //https://riad.blog/2018/06/07/efficient-client-data-management-for-wordpress-plugins/
@@ -25,7 +27,7 @@ wp.data.subscribe(function () {
 
     } // Retrigger
 
-    if (isPublishable && !publishableTriggered) {
+    if ((isPublishable && !publishableTriggered) && initalstartuptimepassed) {
         publishableTriggered = true;
         //hasBeenOpened = false;
         checkFeaturedmediaAndShow();
@@ -33,6 +35,10 @@ wp.data.subscribe(function () {
             publishableTriggered = false;
         }, TIMEOUT);
     }
+
+    setTimeout(() => {
+        initalstartuptimepassed = true;
+    }, INITIAL_STARTUP_TIME);
 });
 
 function removeMessage() {
@@ -88,7 +94,9 @@ function checkFeaturedmediaAndShow() {
     let featuredImageId = wp.data.select('core/editor').getEditedPostAttribute('featured_media');
     let posttype = wp.data.select('core/editor').getCurrentPostType();
 
-    if ((featuredImageId === 0 || featuredImageId === undefined) && posttype !== 'page') {
+    console.log(featuredImageId);
+
+    if ((featuredImageId === 0 || featuredImageId === undefined) && posttype !== 'page') { // no featured media
         lock();
 
     } else {

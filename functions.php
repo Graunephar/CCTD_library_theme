@@ -221,7 +221,7 @@ add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
  * Loading custom javascript into gutenberg
  * https://wordpress.org/gutenberg/handbook/designers-developers/developers/tutorials/javascript/loading-javascript/
  */
-function myguten_enqueue() {
+function custom_gutenberg_enqueue() {
 	wp_enqueue_script(
 		'CCTD-gutenberg-script',
 		get_template_directory_uri() . '/js/gutenberg-extensions.js',
@@ -229,7 +229,7 @@ function myguten_enqueue() {
 	);
 }
 
-add_action( 'enqueue_block_editor_assets', 'myguten_enqueue' );
+add_action( 'enqueue_block_editor_assets', 'custom_gutenberg_enqueue' );
 
 function CCTD_file_upload_meta_box( $meta_boxes ) { // register meta boxes with the Meta Box plugin!
 	$prefix = 'cctd-upload-prefix-';
