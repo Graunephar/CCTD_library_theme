@@ -178,6 +178,7 @@ function CCTD_upload_mimes( $existing_mimes ) {
 	$existing_mimes['py'] = 'text/plain';
 	$existing_mimes['r'] = 'text/plain';
 	$existing_mimes['c'] = 'text/plain';
+	$existing_mimes['c'] = 'text/x-c';
 	$existing_mimes['f'] = 'text/plain';
 
 	// Allow the upload of Netlogo files https://www.iana.org/assignments/media-types/media-types.xhtml#application
