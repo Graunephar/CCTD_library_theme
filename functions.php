@@ -174,7 +174,13 @@ function generate_taxonomy_label_array( $singular, $plural, $name_new ) {
 //
 function CCTD_upload_mimes( $existing_mimes ) {
 	// Add webm to the list of mime types.
-	$existing_mimes['nlogo'] = 'text/plain'; // Allow the upload of Netlogo files https://www.iana.org/assignments/media-types/media-types.xhtml#application
+	$existing_mimes['nlogo'] = 'text/plain';
+	$existing_mimes['py'] = 'text/plain';
+	$existing_mimes['r'] = 'text/plain';
+	$existing_mimes['c'] = 'text/plain';
+	$existing_mimes['f'] = 'text/plain';
+
+	// Allow the upload of Netlogo files https://www.iana.org/assignments/media-types/media-types.xhtml#application
 	//https://www.sitepoint.com/mime-types-complete-list/
 
 
