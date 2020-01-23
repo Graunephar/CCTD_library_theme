@@ -35,8 +35,7 @@
 	<?php endif; ?>
 
 
-
-    <div class="tax-link-container coljl-xl-12">
+    <div class="tax-link-container col-xl-12">
 		<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
     </div>
 
