@@ -265,6 +265,10 @@ function CCTD_file_upload_meta_box( $meta_boxes ) { // register meta boxes with 
 
 add_filter( 'rwmb_meta_boxes', 'CCTD_file_upload_meta_box' );
 
+// WARNING changing this can change the databse structure and changes might remove the data of the changed fields on the site.
+//Take care when chaging
+// TODO: Shoudl probably be changed to a "fieldset_text" input group, see more here: https://docs.metabox.io/field-settings/
+
 function CCTD_aurthor_meta_box( $meta_boxes ) {
 	$prefix = 'cctd_author-prefix-';
 
@@ -297,6 +301,32 @@ function CCTD_aurthor_meta_box( $meta_boxes ) {
 	return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'CCTD_aurthor_meta_box' );
+
+
+function CCTD_number_of_lessons_meta_box( $meta_boxes ) {
+
+	$meta_boxes[] = array(
+		'id' => 'cctd-lesson-lenght-number',
+		'title' => esc_html__( 'Om Forløbet', 'CCTD_lesson' ),
+		'post_types' => array( 'post' ),
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'autosave'   => 'true',
+		'fields'     => array(
+			array(
+				'name' => 'Antal Lektioner',
+				'id'   => 'cctd-lesson-number',
+				'type' => 'number',
+				'min'  => 0,
+				'step' => 1,
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'CCTD_number_of_lessons_meta_box' );
+
 
 /* ================================================== POSTS ================================= */
 

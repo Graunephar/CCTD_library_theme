@@ -60,12 +60,24 @@ if ( sizeof( $authors ) == 1 ) {
     </div>
 
 
-
-
     <div class="tax-link-container col-xl-12">
 		<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
     </div>
 
+    
+
+    <div class="tax-link-container col-xl-12">
+		<?php
+        $lessons = rwmb_meta( 'cctd-lesson-number' );
+        if($lessons):
+        ?>
+        <span> Antal Lektioner: <?php echo $lessons?> </span>
+
+        <?php
+        endif;
+
+        ?>
+    </div>
 
 </div>
 
