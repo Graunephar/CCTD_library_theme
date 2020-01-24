@@ -16,11 +16,16 @@ if ( sizeof( $authors ) == 1 ) {
 
     <div class="tax-link-container col-xl-12">
 
-    <span><?php echo $prefix . ":"?> </span>
 
 <?php
 
 	if ( $authors || $schools ):
+
+
+        ?>
+        <span><?php echo $prefix . ":"?> </span>
+
+        <?php
 
         $i = 0;
 		foreach ($authors as $author):
