@@ -45,6 +45,9 @@ get_header(); ?>
 
 					the_content( "Læs mere" . get_the_title() );
 
+					?>
+
+                    <?php
 					wp_link_pages( array(
 						'before'       => '<div class="page-links">' . esc_html__( 'Sider:', 'CCTD' ),
 						'after'        => '</div>',
@@ -54,13 +57,11 @@ get_header(); ?>
 
                 </div><!-- .entry-content -->
 
-
                 <footer class="entry-footer">
 					<?php CCTD_entry_footer(); ?>
                 </footer><!-- .entry-footer -->
             </article><!-- #post-<?php the_ID(); ?> -->
         </div>
-
 		<?php
 
 
@@ -70,6 +71,7 @@ get_header(); ?>
 		) );
 
 		?>
+
         <hr>
 		<?php
 		// If comments are open or we have at least one comment, load up the comment template.

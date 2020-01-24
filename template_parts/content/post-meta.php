@@ -64,7 +64,7 @@ if ( sizeof( $authors ) == 1 ) {
 		<?php CCTD_entry_taxonomy( get_post()->ID ); ?>
     </div>
 
-    
+
 
     <div class="tax-link-container col-xl-12">
 		<?php

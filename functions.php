@@ -304,9 +304,9 @@ add_filter( 'rwmb_meta_boxes', 'CCTD_aurthor_meta_box' );
 
 
 function CCTD_number_of_lessons_meta_box( $meta_boxes ) {
-
+$prefix = "cctd-lesson-";
 	$meta_boxes[] = array(
-		'id' => 'cctd-lesson-lenght-number',
+		'id' => 'cctd-lesson',
 		'title' => esc_html__( 'Om Forløbet', 'CCTD_lesson' ),
 		'post_types' => array( 'post' ),
 		'context'    => 'normal',
@@ -315,10 +315,18 @@ function CCTD_number_of_lessons_meta_box( $meta_boxes ) {
 		'fields'     => array(
 			array(
 				'name' => 'Antal Lektioner',
-				'id'   => 'cctd-lesson-number',
+				'id'   => $prefix . 'number',
 				'type' => 'number',
 				'min'  => 0,
 				'step' => 1,
+			),
+			array( //Currently not used anywere since its unknown were it would fit in
+				'name' => 'Netlogo Version',
+				'id'   => $prefix . 'netlogo-version',
+				'type' => 'number',
+				'min'  => 0,
+				'step' => 'any',
+				'placeholder' => '6.1.1',
 			),
 		),
 	);
