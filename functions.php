@@ -281,12 +281,13 @@ function CCTD_aurthor_meta_box( $meta_boxes ) {
 				'type' => 'text',
 				'name' => esc_html__( 'Forfatter', 'CCTD_author' ),
 				'placeholder' => esc_html__( 'Forfatter', 'CCTD_author' ),
-			),
+ 			),
 			array(
 				'id' => $prefix . 'gymnasium',
 				'type' => 'text',
 				'name' => esc_html__( 'Gymnasium', 'CCTD_author' ),
 				'placeholder' => esc_html__( 'Gymnasium', 'CCTD_author' ),
+
 			),
 		),
 	);
